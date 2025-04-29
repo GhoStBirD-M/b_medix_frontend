@@ -27,9 +27,9 @@ fake_async
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/fake_async-1.3.2/
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/fake_async-1.3.2/lib/
 flutter_lints
-3.5
-file:///home/ghostbird/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0/
-file:///home/ghostbird/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0/lib/
+2.19
+file:///home/ghostbird/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3/
+file:///home/ghostbird/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3/lib/
 leak_tracker
 3.2
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/leak_tracker-10.0.8/
@@ -43,9 +43,9 @@ leak_tracker_testing
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1/
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1/lib/
 lints
-3.6
-file:///home/ghostbird/.pub-cache/hosted/pub.dev/lints-5.1.1/
-file:///home/ghostbird/.pub-cache/hosted/pub.dev/lints-5.1.1/lib/
+3.0
+file:///home/ghostbird/.pub-cache/hosted/pub.dev/lints-2.1.1/
+file:///home/ghostbird/.pub-cache/hosted/pub.dev/lints-2.1.1/lib/
 matcher
 3.4
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/matcher-0.12.17/
@@ -94,8 +94,8 @@ vm_service
 3.3
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/vm_service-14.3.1/
 file:///home/ghostbird/.pub-cache/hosted/pub.dev/vm_service-14.3.1/lib/
-b_medix_frontend
-3.7
+flutter_login
+3.0
 file:///home/ghostbird/Documents/b_medix_frontend/
 file:///home/ghostbird/Documents/b_medix_frontend/lib/
 sky_engine

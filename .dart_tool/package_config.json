@@ -51,9 +51,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///home/ghostbird/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0",
+      "rootUri": "file:///home/ghostbird/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_test",
@@ -81,9 +81,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///home/ghostbird/.pub-cache/hosted/pub.dev/lints-5.1.1",
+      "rootUri": "file:///home/ghostbird/.pub-cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.6"
+      "languageVersion": "3.0"
     },
     {
       "name": "matcher",
@@ -164,13 +164,13 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "b_medix_frontend",
+      "name": "flutter_login",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-04-28T16:17:17.781220Z",
+  "generated": "2025-04-29T07:27:55.947865Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///usr/lib/flutter",
