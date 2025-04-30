@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/controllers/auth_controller.dart';
-import 'package:tes_main/controllers/home_controller.dart';
+import '../../controllers/auth_controller.dart';
+import '../../controllers/home_controller.dart';
 import '../widgets/article_card.dart';
 import '../widgets/bottom_navigation.dart';
 import '../widgets/header.dart';
