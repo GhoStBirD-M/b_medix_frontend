@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:tes_main/routes/auth_middleware.dart';
 import 'package:tes_main/views/doctor/doctor_screen.dart';
 import '../bindings/article_binding.dart';
 import '../views/article/article_detail_screen.dart';
@@ -35,20 +36,24 @@ class AppPages {
       name: HOME,
       page: () => HomePage(),
       binding: HomeBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: ARTICLE,
       page: () => ArticleScreen(),
       binding: ArticleBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: ARTICLE_DETAIL,
       page: () => ArticleDetailScreen(),
       binding: ArticleBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: DOCTOR, 
       page: () => DoctorScreen(),
-      )
+      middlewares: [AuthMiddleware()],
+    ),
   ];
 }

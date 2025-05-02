@@ -7,6 +7,7 @@ import '../routes/app_pages.dart';
 // import 'views/home/splash_screen.dart';
 
 void main() async {
+  await GetStorage.init();
   Get.put(AuthController());
   runApp(
     DevicePreview(
