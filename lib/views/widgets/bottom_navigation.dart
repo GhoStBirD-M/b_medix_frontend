@@ -36,13 +36,13 @@ class BottomNavigation extends StatelessWidget {
                 isSelected: currentIndex == 0,
                 index: 0,
               ),
-              // _buildNavItem(
-              //   context,
-              //   icon: Icons.health_and_safety,
-              //   label: 'Consultation',
-              //   isSelected: currentIndex == 1,
-              //   index: 1,
-              // ),
+              _buildNavItem(
+                context,
+                icon: Icons.health_and_safety,
+                label: 'Consultation',
+                isSelected: currentIndex == 1,
+                index: 1,
+              ),
               _buildNavItem(
                 context,
                 icon: Icons.article,
@@ -78,9 +78,9 @@ class BottomNavigation extends StatelessWidget {
             case 0:
               Get.offAllNamed(AppPages.HOME);
               break;
-            // case 1:
-              // Get.offAllNamed(AppPages.CONSULTATION);
-              // break;
+            case 1:
+              Get.offAllNamed(AppPages.DOCTOR);
+              break;
             case 2:
               Get.offAllNamed(AppPages.ARTICLE);
               break;

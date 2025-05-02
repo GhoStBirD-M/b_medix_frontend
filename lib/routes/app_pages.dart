@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:tes_main/views/doctor/doctor_screen.dart';
 import '../bindings/article_binding.dart';
 import '../views/article/article_detail_screen.dart';
 import '../views/article/article_screen.dart';
@@ -16,6 +17,8 @@ class AppPages {
   static const HOME = '/home';
   static const ARTICLE = '/article';
   static const ARTICLE_DETAIL = '/article/detail';
+  static const DOCTOR = '/doctor';
+
 
   static final routes = [
     GetPage(
@@ -43,5 +46,9 @@ class AppPages {
       page: () => ArticleDetailScreen(),
       binding: ArticleBinding(),
     ),
+    GetPage(
+      name: DOCTOR, 
+      page: () => DoctorScreen(),
+      )
   ];
 }
