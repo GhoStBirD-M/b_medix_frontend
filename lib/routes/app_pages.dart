@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:b_medix_frontend/bindings/doctor_binding.dart';
+import 'package:b_medix_frontend/views/doctor/doctor_screen.dart';
 import 'package:get/get.dart';
 import '../bindings/auth_binding.dart';
 import '../bindings/home_binding.dart';
@@ -13,23 +15,16 @@ class AppPages {
   static const HOME = '/home';
   static const ARTICLE = '/article';
   static const ARTICLE_DETAIL = '/article/detail';
+  static const CONSULTATION = '/consultation';
 
   static final routes = [
-    GetPage(
-      name: LOGIN,
-      page: () => LoginScreen(),
-      binding: AuthBinding(),
-    ),
+    GetPage(name: LOGIN, page: () => LoginScreen(), binding: AuthBinding()),
     GetPage(
       name: REGISTER,
       page: () => RegisterScreen(),
       binding: AuthBinding(),
     ),
-    GetPage(
-      name: HOME,
-      page: () => HomePage(),
-      binding: HomeBinding(),
-    ),
+    GetPage(name: HOME, page: () => HomePage(), binding: HomeBinding()),
     // GetPage(
     //   name: ARTICLE,
     //   page: () => ArticleScreen(),
@@ -40,5 +35,10 @@ class AppPages {
     //   page: () => ArticleDetailScreen(),
     //   binding: ArticleBinding(),
     // ),
+    GetPage(
+      name: CONSULTATION,
+      page: () => DoctorScreen(),
+      binding: DoctorBinding(),
+    ),
   ];
 }
