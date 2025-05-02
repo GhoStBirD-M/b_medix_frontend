@@ -1,6 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import '../bindings/article_binding.dart';
+import '../views/article/article_detail_screen.dart';
+import '../views/article/article_screen.dart';
 import '../bindings/auth_binding.dart';
 import '../bindings/home_binding.dart';
 import '../views/auth/login_screen.dart';
@@ -30,15 +33,15 @@ class AppPages {
       page: () => HomePage(),
       binding: HomeBinding(),
     ),
-    // GetPage(
-    //   name: ARTICLE,
-    //   page: () => ArticleScreen(),
-    //   binding: ArticleBinding(),
-    // ),
-    // GetPage(
-    //   name: ARTICLE_DETAIL,
-    //   page: () => ArticleDetailScreen(),
-    //   binding: ArticleBinding(),
-    // ),
+    GetPage(
+      name: ARTICLE,
+      page: () => ArticleScreen(),
+      binding: ArticleBinding(),
+    ),
+    GetPage(
+      name: ARTICLE_DETAIL,
+      page: () => ArticleDetailScreen(),
+      binding: ArticleBinding(),
+    ),
   ];
 }

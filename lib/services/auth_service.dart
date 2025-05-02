@@ -27,6 +27,7 @@ class AuthService {
 
       // Save token
       box.write('token', data['token']);
+      print('TOKEN: ${box.read('token')}');
       box.write('user', jsonEncode(data['user']));
 
       return user;

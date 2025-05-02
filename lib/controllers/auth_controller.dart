@@ -59,6 +59,15 @@ class AuthController extends GetxController {
   }
 
   Future<void> register() async {
+    if ( emailController.text.isEmpty || passwordController.text.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Please enter email and password',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
     try {
       isLoading.value = true;
       final result = await _authService.register(

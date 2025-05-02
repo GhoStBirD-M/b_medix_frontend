@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tes_main/routes/app_pages.dart';
 import '../../controllers/auth_controller.dart';
 import '../widgets/auth/custom_button.dart';
 import '../widgets/auth/custom_text_field.dart';
@@ -32,7 +33,6 @@ class RegisterScreen extends StatelessWidget {
                 CustomTextField(
                   controller: controller.nameController,
                   hintText: 'Your Name',
-                  keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
                 CustomTextField(
                   controller: controller.passwordController,
                   hintText: 'Password',
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.visiblePassword,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
@@ -55,9 +55,7 @@ class RegisterScreen extends StatelessWidget {
                 const SizedBox(height: 24),
                 CustomButton(
                   text: 'Sign In',
-                  onPressed: () {
-                    // Handle sign in logic
-                  },
+                  onPressed: () => Get.toNamed(AppPages.LOGIN),
                 ),
                 const SizedBox(height: 24),
                 Row(

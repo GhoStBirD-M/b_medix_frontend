@@ -1,14 +1,19 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tes_main/controllers/auth_controller.dart';
 import '../routes/app_pages.dart';
 // import 'views/home/splash_screen.dart';
 
-
-
 void main() async {
-  await GetStorage.init();
-  runApp(MyApp());
+  Get.put(AuthController());
+  runApp(
+    DevicePreview(
+      defaultDevice: Devices.ios.iPhone13ProMax,
+      builder: (context) => MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
