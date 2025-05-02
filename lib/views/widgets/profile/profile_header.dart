@@ -15,7 +15,8 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = DateFormat("dd MMMM yyyy", "id_ID").format(registeredDate);
+    final formattedDate =
+        DateFormat("dd MMMM yyyy", "id_ID").format(registeredDate);
     return Container(
       padding: const EdgeInsets.only(bottom: 24),
       decoration: const BoxDecoration(
@@ -33,22 +34,8 @@ class ProfileHeader extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFE0E0E0),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.black,
-                        size: 20,
-                      ),
-                    ),
+                  Container(
+                    padding: const EdgeInsets.all(8),
                   ),
                   const Expanded(
                     child: Center(
@@ -66,9 +53,9 @@ class ProfileHeader extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Profile Info
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),

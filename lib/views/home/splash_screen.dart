@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+
 import '../auth/login_screen.dart';
 import 'dart:async';
-// import 'home_page.dart';
+import 'home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,15 +13,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final box = GetStorage();
   @override
   void initState() {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
-      ),
+      () {
+        final token = box.read('token');
+        if (token != null && token != '') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+          );
+        }
+      },
     );
   }
 
@@ -48,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 24),
             // App name
             const Text(
-              'MediCare',
+              'B-Medix',
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -58,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 8),
             // Tagline
             const Text(
-              'Your Health, Our Priority',
+              'Your Personal Health Assistant',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.white,

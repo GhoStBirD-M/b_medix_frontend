@@ -43,10 +43,8 @@ class _DoctorScreenState extends State<DoctorScreen>
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFD5E8E6),
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    child: const Icon(Icons.arrow_back_ios_new, color: Colors.black,),
                   ),
                   const Expanded(
                     child: Center(

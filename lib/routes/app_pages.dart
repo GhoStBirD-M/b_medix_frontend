@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:tes_main/routes/auth_middleware.dart';
 import 'package:tes_main/views/doctor/doctor_screen.dart';
+import 'package:tes_main/views/home/splash_screen.dart';
 import 'package:tes_main/views/profile/profile_screen.dart';
 import '../bindings/article_binding.dart';
 import '../views/article/article_detail_screen.dart';
@@ -14,6 +15,7 @@ import '../views/auth/register_screen.dart';
 import '../views/home/home_page.dart';
 
 class AppPages {
+  static const SPLASH = '/';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const HOME = '/home';
@@ -24,6 +26,10 @@ class AppPages {
 
 
   static final routes = [
+    GetPage(
+      name: SPLASH,
+      page: () => SplashScreen(),
+    ),
     GetPage(
       name: LOGIN,
       page: () => LoginScreen(),

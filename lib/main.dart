@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tes_main/controllers/auth_controller.dart';
+import 'package:tes_main/controllers/home_controller.dart';
 import '../routes/app_pages.dart';
-// import 'views/home/splash_screen.dart';
 
 void main() async {
   await GetStorage.init();
   Get.put(AuthController());
+  Get.put(HomeController());
   runApp(
     DevicePreview(
       defaultDevice: Devices.ios.iPhone13ProMax,
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Poppins',
       ),
-      initialRoute: box.read('token') != null ? AppPages.HOME : AppPages.LOGIN,
+      initialRoute: AppPages.SPLASH,
       getPages: AppPages.routes,
     );
   }
