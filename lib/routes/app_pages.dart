@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:tes_main/routes/auth_middleware.dart';
 import 'package:tes_main/views/doctor/doctor_screen.dart';
+import 'package:tes_main/views/profile/profile_screen.dart';
 import '../bindings/article_binding.dart';
 import '../views/article/article_detail_screen.dart';
 import '../views/article/article_screen.dart';
@@ -19,6 +20,7 @@ class AppPages {
   static const ARTICLE = '/article';
   static const ARTICLE_DETAIL = '/article/detail';
   static const DOCTOR = '/doctor';
+  static const PROFILE = '/profile';
 
 
   static final routes = [
@@ -53,6 +55,11 @@ class AppPages {
     GetPage(
       name: DOCTOR, 
       page: () => DoctorScreen(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: PROFILE, 
+      page: () => ProfileScreen(),
       middlewares: [AuthMiddleware()],
     ),
   ];

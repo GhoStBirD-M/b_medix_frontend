@@ -50,13 +50,13 @@ class BottomNavigation extends StatelessWidget {
                 isSelected: currentIndex == 2,
                 index: 2,
               ),
-              // _buildNavItem(
-              //   context,
-              //   icon: Icons.account_circle,
-              //   label: 'Profile',
-              //   isSelected: currentIndex == 3,
-              //   index: 3,
-              // ),
+              _buildNavItem(
+                context,
+                icon: Icons.account_circle,
+                label: 'Profile',
+                isSelected: currentIndex == 3,
+                index: 3,
+              ),
             ],
           ),
         ),
@@ -84,9 +84,9 @@ class BottomNavigation extends StatelessWidget {
             case 2:
               Get.offAllNamed(AppPages.ARTICLE);
               break;
-            // case 3:
-              // Get.offAllNamed(AppPages.PROFILE);
-              // break;
+            case 3:
+              Get.offAllNamed(AppPages.PROFILE);
+              break;
           }
         }
       },
