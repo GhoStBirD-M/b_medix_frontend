@@ -1,6 +1,6 @@
+import '../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/routes/app_pages.dart';
 import '../../controllers/auth_controller.dart';
 import '../widgets/auth/custom_button.dart';
 import '../widgets/auth/custom_text_field.dart';
@@ -33,6 +33,7 @@ class RegisterScreen extends StatelessWidget {
                 CustomTextField(
                   controller: controller.nameController,
                   hintText: 'Your Name',
+                  keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
@@ -45,35 +46,38 @@ class RegisterScreen extends StatelessWidget {
                   controller: controller.passwordController,
                   hintText: 'Password',
                   keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
-                  controller: controller.passwordController,
+                  controller: controller.confirmPasswordController,
                   hintText: 'Please Confirm Your Password',
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
                 ),
                 const SizedBox(height: 24),
-                CustomButton(
-                  text: 'Sign In',
-                  onPressed: () => Get.toNamed(AppPages.LOGIN),
+                Obx(() => controller.isLoading.value
+                  ? Center(child: const CircularProgressIndicator())                  
+                  :CustomButton(
+                      text: 'Register',
+                      onPressed: controller.register,                
+                    ) 
                 ),
                 const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Don't have account? ",
+                      "Already have an account? ",
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 14,
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        // Navigate to create account screen
-                      },
+                      onTap: () => Get.toNamed(AppPages.LOGIN),
                       child: const Text(
-                        'Create Account',
+                        'Log in',
                         style: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.bold,

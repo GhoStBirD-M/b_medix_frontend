@@ -44,19 +44,36 @@ class AuthService {
         'name': name,
         'email': email,
         'password': password,
-        'password_confirmation': password
+        'password_confirmation': password,
       }),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       final data = jsonDecode(response.body);
       final user = User.fromJson(data['user']);
 
-      box.write('token', data['token']);
       box.write('user', jsonEncode(data['user']));
       return user;
     } else {
       throw Exception('Failed to register');
+    }
+  }
+
+  Future<void> logout() async {
+    final token = box.read('token');
+
+    final response = await http.post(
+      Uri.parse('${Constants.BASE_URL}${Constants.LOGOUT_ENDPOINT}'),
+      headers: {
+        'Content-Type': 'Application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      box.remove('token');
+      box.remove('user');
+    } else {
+      throw Exception('Failed to logout');
     }
   }
 }

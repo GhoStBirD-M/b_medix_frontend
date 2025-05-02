@@ -17,6 +17,8 @@ class AuthController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   void onInit() {
@@ -59,15 +61,15 @@ class AuthController extends GetxController {
   }
 
   Future<void> register() async {
-    if ( emailController.text.isEmpty || passwordController.text.isEmpty) {
+    if (passwordController.text != confirmPasswordController.text) {
       Get.snackbar(
-        'Error',
-        'Please enter email and password',
+        "Error",
+        "Passwords do not match",
         snackPosition: SnackPosition.BOTTOM,
       );
+
       return;
     }
-
     try {
       isLoading.value = true;
       final result = await _authService.register(
@@ -76,18 +78,35 @@ class AuthController extends GetxController {
         passwordController.text,
       );
       user.value = result;
-      Get.offAllNamed(AppPages.HOME);
+      Get.offAllNamed(AppPages.LOGIN);
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
       nameController.clear();
       emailController.clear();
       passwordController.clear();
     }
+  }
+
+  Future<void> logout() async {
+    try {
+      isLoading.value = true;
+      await _authService.logout();
+      user.value = null;
+      Get.offAllNamed(AppPages.LOGIN);
+    } catch (e) {
+      Get.snackbar('error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  @override
+  void onClose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
   }
 }
