@@ -86,6 +86,7 @@ class AuthController extends GetxController {
       nameController.clear();
       emailController.clear();
       passwordController.clear();
+      confirmPasswordController.clear();
     }
   }
 
@@ -107,6 +108,7 @@ class AuthController extends GetxController {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.onClose();
   }
 }

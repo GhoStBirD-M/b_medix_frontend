@@ -1,10 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:tes_main/routes/auth_middleware.dart';
-import 'package:tes_main/views/doctor/doctor_screen.dart';
-import 'package:tes_main/views/home/splash_screen.dart';
-import 'package:tes_main/views/profile/profile_screen.dart';
+import 'package:tes_main/bindings/doctor_binding.dart';
+import '../bindings/profile_binding.dart';
+import '../routes/auth_middleware.dart';
+import '../views/doctor/doctor_screen.dart';
+import '../views/home/splash_screen.dart';
+import '../views/profile/profile_screen.dart';
 import '../bindings/article_binding.dart';
 import '../views/article/article_detail_screen.dart';
 import '../views/article/article_screen.dart';
@@ -22,6 +24,7 @@ class AppPages {
   static const ARTICLE = '/article';
   static const ARTICLE_DETAIL = '/article/detail';
   static const DOCTOR = '/doctor';
+  static const CHAT = '/chat/:id';
   static const PROFILE = '/profile';
 
 
@@ -29,6 +32,7 @@ class AppPages {
     GetPage(
       name: SPLASH,
       page: () => SplashScreen(),
+      binding: AuthBinding(),
     ),
     GetPage(
       name: LOGIN,
@@ -61,11 +65,18 @@ class AppPages {
     GetPage(
       name: DOCTOR, 
       page: () => DoctorScreen(),
+      binding: DoctorBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: CHAT, 
+      page: () => DoctorScreen(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: PROFILE, 
       page: () => ProfileScreen(),
+      binding: ProfileBinding(),
       middlewares: [AuthMiddleware()],
     ),
   ];

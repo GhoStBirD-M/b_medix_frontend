@@ -55,7 +55,8 @@ class AuthService {
       box.write('user', jsonEncode(data['user']));
       return user;
     } else {
-      throw Exception('Failed to register');
+      final error = jsonDecode(response.body);
+      throw Exception(error['message'] ?? 'Failed to register');
     }
   }
 

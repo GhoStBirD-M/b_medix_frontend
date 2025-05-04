@@ -5,9 +5,9 @@ import '../models/article_model.dart';
 class ArticleController extends GetxController {
   final ArticleService _apiService = ArticleService();
   
+  final RxBool isLoading = false.obs;
   final RxList<ArticleElement> articles = <ArticleElement>[].obs;
   final Rx<ArticleElement?> selectedArticle = Rx<ArticleElement?>(null);
-  final RxBool isLoading = false.obs;
   
   @override
   void onInit() {

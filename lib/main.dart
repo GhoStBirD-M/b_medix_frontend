@@ -2,13 +2,11 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tes_main/controllers/auth_controller.dart';
-import 'package:tes_main/controllers/home_controller.dart';
+import '../controllers/home_controller.dart';
 import '../routes/app_pages.dart';
 
 void main() async {
   await GetStorage.init();
-  Get.put(AuthController());
   Get.put(HomeController());
   runApp(
     DevicePreview(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/routes/app_pages.dart';
+import '../../../routes/app_pages.dart';
 
 class BottomNavigation extends StatelessWidget {
   final int currentIndex;

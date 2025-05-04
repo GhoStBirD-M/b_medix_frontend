@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../routes/app_pages.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/home_controller.dart';
-import '../widgets/article_card.dart';
-import '../widgets/bottom_navigation.dart';
-import '../widgets/header.dart';
-import '../widgets/product_card.dart';
-import '../widgets/promotion_banner.dart';
+import '../widgets/article/article_card.dart';
+import '../widgets/common/bottom_navigation.dart';
+import '../widgets/common/header.dart';
+import '../widgets/common/product_card.dart';
+import '../widgets/common/promotion_banner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Colors.grey.shade100,
       body: SafeArea(
         child: Obx(() {
           final user = authController.user.value;
@@ -76,6 +77,24 @@ class _HomePageState extends State<HomePage> {
                                 buttonText: 'ORDER NOW',
                                 color: Color(0xFFE6E1FF),
                                 iconData: Icons.medication,
+                              ),
+                              PromotionBanner(
+                                title: 'UPTO 80% OFFER*',
+                                description: 'On Health Products',
+                                discount:
+                                    'Homeopathy, Ayurvedic, Personal Care & More',
+                                buttonText: 'SHOP NOW',
+                                color: Color(0xFFD1E8E6),
+                                showImage: true,
+                              ),
+                              PromotionBanner(
+                                title: 'UPTO 80% OFFER*',
+                                description: 'On Health Products',
+                                discount:
+                                    'Homeopathy, Ayurvedic, Personal Care & More',
+                                buttonText: 'SHOP NOW',
+                                color: Color(0xFFD1E8E6),
+                                showImage: true,
                               ),
                               PromotionBanner(
                                 title: 'UPTO 80% OFFER*',
@@ -158,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                             TextButton(
-                                onPressed: () {}, child: const Text('See all')),
+                                onPressed: () => Get.offAllNamed(AppPages.ARTICLE), child: const Text('See all')),
                           ],
                         ),
                         const ArticleCard(

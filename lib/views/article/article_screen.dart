@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tes_main/views/widgets/common/search_bar.dart';
 import '../../controllers/article_controller.dart';
 import '../../routes/app_pages.dart';
-import '../../views/widgets/bottom_navigation.dart';
+import '../widgets/common/bottom_navigation.dart';
 import 'dart:math';
 
 class ArticleScreen extends StatelessWidget {
@@ -28,7 +29,7 @@ class ArticleScreen extends StatelessWidget {
       backgroundColor: Colors.grey.shade100,
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());  
         } else if (controller.articles.isEmpty) {
           return const Center(child: Text('No articles found'));
         } else {
@@ -38,43 +39,7 @@ class ArticleScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               children: [
                 // Search Bar
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Container(
-                    height: 49,
-                    padding: const EdgeInsets.symmetric(horizontal: 13),
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      shadows: [
-                        BoxShadow(
-                          color: Color(0x3F000000),
-                          blurRadius: 2,
-                          offset: Offset(0, 0),
-                          spreadRadius: 0,
-                        ),
-                      ],
-                    ),
-                    child: const Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Search Articles',
-                          style: TextStyle(
-                            color: Color(0xFF5E5E5E),
-                            fontSize: 12.2,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            height: 1.6,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                CustomSearchBar(hintText: 'Search Articles'),
 
                 // Heading
                 const Padding(

@@ -16,14 +16,14 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16.0),
-      color: Colors.white,
+      color: Colors.grey.shade100,
       child: Row(
         children: [
           // Avatar
           CircleAvatar(
             radius: 24,
             backgroundImage: NetworkImage(avatarUrl),
-            backgroundColor: Colors.grey[300],
+            backgroundColor: Colors.white,
             child: avatarUrl == '/placeholder.svg'
                 ? const Icon(Icons.person, size: 30, color: Colors.grey)
                 : null,
