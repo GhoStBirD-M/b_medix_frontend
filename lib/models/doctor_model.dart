@@ -6,31 +6,19 @@ class Doctors {
   Doctors({
     required this.doctors,
   });
-  
-  factory Doctors.fromJson(List<dynamic> json) {
-    // // Handle case where data might be directly in the json or in a 'data' field
-    // final List<dynamic> doctorsList;
-    
-    // if (json['data'] != null) {
-    //   // If the API returns { "data": [...] }
-    //   doctorsList = json['data'];
-    // } else if (json is Map && json.containsKey('doctors')) {
-    //   // If the API returns { "doctors": [...] }
-    //   doctorsList = json['doctors'];
-    // } else {
-    //   // If the API returns the list directly at the root level
-    //   doctorsList = json.containsKey('data') ? json['data'] : (json is List ? json : []);
-    // }
-    
+
+  factory Doctors.fromJson(Map<String, dynamic> json) {
     return Doctors(
-      doctors: List<Doctor>.from(json.map((x) => Doctor.fromJson(x))),
+      doctors: List<Doctor>.from(
+        (json['doctors'] as List).map((x) => Doctor.fromJson(x)),
+      ),
     );
   }
 }
 
 class Doctor {
   final int id;
-  final dynamic image;
+  final String? image;
   final String name;
   final String specialist;
   final DateTime createdAt;
@@ -38,7 +26,7 @@ class Doctor {
 
   Doctor({
     required this.id,
-    required this.image,
+    this.image,
     required this.name,
     required this.specialist,
     required this.createdAt,

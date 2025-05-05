@@ -5,10 +5,10 @@ class ReceivedMessage extends StatelessWidget {
   final String time;
 
   const ReceivedMessage({
-    Key? key,
+    super.key,
     required this.message,
     required this.time,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

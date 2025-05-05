@@ -1,4 +1,4 @@
-import '../widgets/doctor/recive_message.dart';
+import '../widgets/doctor/received_message.dart';
 import '../widgets/doctor/sent_message.dart';
 import 'package:flutter/material.dart';
 

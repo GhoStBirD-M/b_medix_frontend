@@ -2,16 +2,13 @@ import 'package:get/get.dart';
 import 'package:tes_main/controllers/doctor_controller.dart';
 import 'package:tes_main/views/widgets/common/consult_tab_bar.dart';
 import 'package:tes_main/views/widgets/common/search_bar.dart';
-
 import '../widgets/common/bottom_navigation.dart';
-
 import '../widgets/doctor/doctor_card.dart';
-import './doctor_chat_screen.dart';
-// import '../widgets/doctor/doctor_list_item.dart';
+// import './doctor_chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class DoctorScreen extends StatefulWidget {
-  DoctorScreen({super.key});
+  const DoctorScreen({super.key});
 
   @override
   State<DoctorScreen> createState() => _DoctorScreenState();

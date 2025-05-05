@@ -7,7 +7,7 @@ import '../routes/app_pages.dart';
 
 void main() async {
   await GetStorage.init();
-  Get.put(HomeController());
+  Get.put(HomeController(), permanent: true);
   runApp(
     DevicePreview(
       defaultDevice: Devices.ios.iPhone13ProMax,
