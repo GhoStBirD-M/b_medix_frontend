@@ -7,6 +7,7 @@ class DoctorCard extends StatelessWidget {
   final String specialist;
   final String openTime;
   final String closeTime;
+  final VoidCallback onPressed;
 
   const DoctorCard({
     super.key,
@@ -15,6 +16,7 @@ class DoctorCard extends StatelessWidget {
     required this.specialist,
     required this.openTime,
     required this.closeTime,
+    required this.onPressed,
   });
 
   @override
@@ -82,7 +84,7 @@ class DoctorCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF0BAB7C),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

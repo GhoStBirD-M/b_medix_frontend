@@ -1,7 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:tes_main/bindings/doctor_binding.dart';
+import 'package:tes_main/bindings/chat_binding.dart';
+import '../bindings/doctor_binding.dart';
+import '../views/doctor/doctor_chat_screen.dart';
 import '../bindings/profile_binding.dart';
 import '../routes/auth_middleware.dart';
 import '../views/doctor/doctor_screen.dart';
@@ -70,7 +72,8 @@ class AppPages {
     ),
     GetPage(
       name: CHAT, 
-      page: () => DoctorScreen(),
+      page: () => DoctorChatScreen(),
+      binding: ChatBinding(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(

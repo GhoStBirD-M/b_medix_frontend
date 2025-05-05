@@ -1,12 +1,15 @@
-import '../widgets/doctor/received_message.dart';
-import '../widgets/doctor/sent_message.dart';
+import 'package:get/get.dart';
+import 'package:tes_main/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 
 class DoctorChatScreen extends StatelessWidget {
-  const DoctorChatScreen({Key? key}) : super(key: key);
+  const DoctorChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ChatController chatController = Get.put(ChatController());
+    final TextEditingController messageController = TextEditingController();
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -33,7 +36,7 @@ class DoctorChatScreen extends StatelessWidget {
                         Icons.arrow_back_ios_new,
                         color: Colors.black,
                       ),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => Get.back(),
                     ),
                   ),
                   const Expanded(
@@ -68,8 +71,8 @@ class DoctorChatScreen extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 25,
-                    backgroundImage: AssetImage('assets/doctor2.png'),
-                    child: Icon(Icons.person, color: Colors.grey),
+                    backgroundImage: AssetImage('assets/images/doc_icon.png'),
+                    backgroundColor: Colors.white,
                   ),
                   const SizedBox(width: 16),
                   Column(
@@ -89,25 +92,6 @@ class DoctorChatScreen extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD5E8E6),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const Icon(Icons.videocam, color: Colors.black),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD5E8E6),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const Icon(Icons.phone, color: Colors.black),
-                  ),
                 ],
               ),
             ),
@@ -116,53 +100,37 @@ class DoctorChatScreen extends StatelessWidget {
 
             // Chat Messages
             Expanded(
-              child: ListView(
-                padding: const EdgeInsets.all(16.0),
-                children: [
-                  // Received Message
-                  const ReceivedMessage(
-                    message: 'Hey there! 👋',
-                    time: '10:10',
-                  ),
-
-                  const ReceivedMessage(
-                    message:
-                        'This is your delivery driver from Speedy Chow. I\'m just around the corner from your place. 😊',
-                    time: '10:10',
-                  ),
-
-                  // Sent Message
-                  const SentMessage(
-                    message: 'Hi!',
-                    time: '10:10',
-                    isRead: true,
-                  ),
-
-                  const SentMessage(
-                    message:
-                        'Awesome, thanks for letting me know! Can\'t wait for my delivery. 🍕',
-                    time: '10:11',
-                    isRead: true,
-                  ),
-
-                  const ReceivedMessage(
-                    message:
-                        'No problem at all!\nI\'ll be there in about 15 minutes.',
-                    time: '10:11',
-                  ),
-
-                  const ReceivedMessage(
-                    message: 'I\'ll text you when I arrive.',
-                    time: '10:11',
-                  ),
-
-                  const SentMessage(
-                    message: 'Great! 😊',
-                    time: '10:12',
-                    isRead: true,
-                  ),
-                ],
-              ),
+              child: Obx(() {
+                if (chatController.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return ListView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: chatController.messages.length,
+                    itemBuilder: (context, index) {
+                      final chat = chatController.messages[index];
+                      final isUser = chat.sender == 'user';
+                      return Align(
+                        alignment: isUser
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 4),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: isUser ? Colors.teal : Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            chat.message,
+                            style: TextStyle(
+                              color: isUser ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              }),
             ),
 
             // Message Input
@@ -192,6 +160,7 @@ class DoctorChatScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: TextField(
+                              controller: messageController,
                               decoration: InputDecoration(
                                 hintText: 'Type a message ...',
                                 hintStyle: TextStyle(
@@ -201,33 +170,28 @@ class DoctorChatScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.camera_alt,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.attach_file,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {},
-                          ),
                         ],
                       ),
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.teal,
-                      borderRadius: BorderRadius.circular(25),
+                  GestureDetector(
+                    onTap: () {
+                      final msg = messageController.text.trim();
+                      if (msg.isNotEmpty) {
+                        chatController.sendMessage(msg);
+                        messageController.clear();
+                      }
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.teal,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: const Icon(Icons.send, color: Colors.white),
                     ),
-                    child: const Icon(Icons.mic, color: Colors.white),
                   ),
                 ],
               ),
