@@ -8,4 +8,5 @@ class Constants {
   static const String LOGIN_ENDPOINT = '/login';
   static const String REGISTER_ENDPOINT = '/register';
   static const String LOGOUT_ENDPOINT = '/logout';
+  static const String MEDICINE_ENDPOINT = '/medicine';
 }
