@@ -1,12 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:tes_main/bindings/chat_binding.dart';
+import '../bindings/chat_binding.dart';
 import '../bindings/doctor_binding.dart';
-import '../views/doctor/doctor_chat_screen.dart';
+import '../views/consultation/doctor_chat_screen.dart';
 import '../bindings/profile_binding.dart';
 import '../routes/auth_middleware.dart';
-import '../views/doctor/doctor_screen.dart';
+import '../views/consultation/doctor_screen.dart';
 import '../views/home/splash_screen.dart';
 import '../views/profile/profile_screen.dart';
 import '../bindings/article_binding.dart';

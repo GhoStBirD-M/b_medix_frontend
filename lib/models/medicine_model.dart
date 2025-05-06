@@ -1,5 +1,3 @@
-import '../utils/constants.dart';
-
 class Medicine {
   final int id;
   final String disease;

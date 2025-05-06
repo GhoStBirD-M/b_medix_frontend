@@ -5,7 +5,7 @@ class Constants {
   static const String ARTICLE_ENDPOINT = '/article';
   static const String ARTICLE_DETAIL_ENDPOINT = '/article/';
   static const String DOCTOR_ENDPOINT = '/doctors';
-  static const String CHAT_ENDPOINT = '/chat/';
+  static const String CHAT_ENDPOINT = '/chat';
   static const String MEDICINE_ENDPOINT = '/medicine';
   static const String LOGIN_ENDPOINT = '/login';
   static const String REGISTER_ENDPOINT = '/register';

@@ -1,15 +1,30 @@
 import 'package:get/get.dart';
-import 'package:tes_main/controllers/chat_controller.dart';
+import 'package:tes_main/routes/app_pages.dart';
+import '../../controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 
-class DoctorChatScreen extends StatelessWidget {
+class DoctorChatScreen extends StatefulWidget {
   const DoctorChatScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final ChatController chatController = Get.put(ChatController());
-    final TextEditingController messageController = TextEditingController();
+  State<DoctorChatScreen> createState() => _DoctorChatScreenState();
+}
 
+class _DoctorChatScreenState extends State<DoctorChatScreen> {
+  final ChatController chatController = Get.put(ChatController());
+  final TextEditingController messageController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    final id = Get.parameters['id'];
+    if (id != null) {
+      chatController.setDoctorId(int.tryParse(id) ?? 0);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -36,7 +51,7 @@ class DoctorChatScreen extends StatelessWidget {
                         Icons.arrow_back_ios_new,
                         color: Colors.black,
                       ),
-                      onPressed: () => Get.back(),
+                      onPressed: () => Get.offAllNamed(AppPages.DOCTOR),
                     ),
                   ),
                   const Expanded(
@@ -101,9 +116,6 @@ class DoctorChatScreen extends StatelessWidget {
             // Chat Messages
             Expanded(
               child: Obx(() {
-                if (chatController.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                }
                 return ListView.builder(
                     padding: const EdgeInsets.all(16.0),
                     itemCount: chatController.messages.length,
@@ -176,11 +188,12 @@ class DoctorChatScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       final msg = messageController.text.trim();
                       if (msg.isNotEmpty) {
                         chatController.sendMessage(msg);
                         messageController.clear();
+                        await chatController.fetchChatHistory();
                       }
                     },
                     child: Container(

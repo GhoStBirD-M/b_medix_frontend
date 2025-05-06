@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:get_storage/get_storage.dart';
-import 'package:tes_main/models/doctor_model.dart';
-import 'package:tes_main/utils/constants.dart';
+import '../models/doctor_model.dart';
+import '../utils/constants.dart';
 import 'package:http/http.dart' as http;
 class DoctorService {
   final box = GetStorage();

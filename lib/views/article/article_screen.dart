@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tes_main/views/widgets/common/search_bar.dart';
+import '../../views/widgets/common/search_bar.dart';
 import '../../controllers/article_controller.dart';
 import '../../routes/app_pages.dart';
 import '../widgets/common/bottom_navigation.dart';

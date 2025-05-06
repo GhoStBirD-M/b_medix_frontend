@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
-import 'package:tes_main/models/chat_model.dart';
-import 'package:tes_main/utils/constants.dart';
+import '../models/chat_model.dart';
+import '../utils/constants.dart';
 import 'package:http/http.dart' as http;
 class ChatService {
   final box = GetStorage();
@@ -37,6 +37,9 @@ class ChatService {
         'sender': 'user',
       }),
     );
+
+    // print("Status Code: ${response.statusCode}");
+    // print("Response Body: ${response.body}");
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       return Chat.fromJson(jsonDecode(response.body));

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/controllers/medicine_controller.dart';
-import 'package:tes_main/views/widgets/medicine/medicine_cards.dart';
+import '../../controllers/medicine_controller.dart';
+import '../../views/widgets/medicine/medicine_cards.dart';
 
 class MedicineTab extends StatelessWidget {
   MedicineTab({Key? key}) : super(key: key);

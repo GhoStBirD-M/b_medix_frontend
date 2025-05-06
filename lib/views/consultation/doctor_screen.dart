@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:tes_main/controllers/doctor_controller.dart';
-import 'package:tes_main/routes/app_pages.dart';
-import 'package:tes_main/views/widgets/common/consult_tab_bar.dart';
-import 'package:tes_main/views/widgets/common/search_bar.dart';
-import 'package:tes_main/views/widgets/medicine/medicine_tabs.dart';
+import '../../controllers/doctor_controller.dart';
+// import '../../routes/app_pages.dart';
+import '../../views/widgets/common/consult_tab_bar.dart';
+import '../../views/widgets/common/search_bar.dart';
+import '../../views/consultation/medicine_tabs.dart';
 import '../widgets/common/bottom_navigation.dart';
 import '../widgets/doctor/doctor_card.dart';
 // import './doctor_chat_screen.dart';
@@ -96,7 +96,7 @@ class _DoctorScreenState extends State<DoctorScreen>
                                 specialist: doctor.specialist,
                                 openTime: "08:00",
                                 closeTime: "17:00",
-                                onPressed: () => Get.toNamed(AppPages.CHAT.replaceFirst(':id', doctor.id.toString())),
+                                onPressed: () => Get.toNamed('/chat/${doctor.id}'),
                                 );
                           },
                         );
