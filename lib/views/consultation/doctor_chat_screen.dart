@@ -117,6 +117,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
             Expanded(
               child: Obx(() {
                 return ListView.builder(
+                    controller: chatController.scrollController,
                     padding: const EdgeInsets.all(16.0),
                     itemCount: chatController.messages.length,
                     itemBuilder: (context, index) {

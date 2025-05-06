@@ -23,7 +23,7 @@ class Medicine {
     return Medicine(
       id: json['id'],
       disease: json['disease'],
-      imageUrl: 'https://b-medix.im-fall.my.id/storage/${json['image']}',
+      imageUrl: 'https://b-medix.im-fall.my.id/storage/medicines/paracetamol.png',
       name: json['name'],
       description: json['description'],
       price: json['price'],

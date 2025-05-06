@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import '../models/chat_model.dart';
 import '../utils/constants.dart';
 import 'package:http/http.dart' as http;
+
 class ChatService {
   final box = GetStorage();
   // Chat
@@ -42,7 +43,8 @@ class ChatService {
     // print("Response Body: ${response.body}");
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      return Chat.fromJson(jsonDecode(response.body));
+      List<dynamic> data = jsonDecode(response.body);
+      return Chat.fromJson(data.last);
     } else {
       throw Exception('Failed to send message: ${response.body}');
     }

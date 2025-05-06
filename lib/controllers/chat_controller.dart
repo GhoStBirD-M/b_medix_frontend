@@ -1,9 +1,11 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../models/chat_model.dart';
 import '../services/chat_service.dart';
 
 class ChatController extends GetxController {
   final ChatService _apiService = Get.find<ChatService>();
+  final ScrollController scrollController = ScrollController();
 
   final RxBool isLoading = false.obs;
   final RxList<Chat> messages = <Chat>[].obs;
@@ -13,7 +15,23 @@ class ChatController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // The doctorId will be set when navigating to the chat page
+
+    /// Auto scroll setiap kali messages berubah
+    ever(messages, (_) {
+      scrollToBottom();
+    });
+  }
+
+  void scrollToBottom() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      if (scrollController.hasClients) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   void setDoctorId(int id) {
@@ -37,7 +55,8 @@ class ChatController extends GetxController {
   Future<void> sendMessage(String message) async {
     if (message.trim().isEmpty) return;
     if (doctorId.value == 0) {
-      Get.snackbar('Error', 'Target doctor is not set', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', 'Target doctor is not set',
+          snackPosition: SnackPosition.BOTTOM);
       return;
     }
 
@@ -52,6 +71,7 @@ class ChatController extends GetxController {
       fetchChatHistory();
     } catch (e) {
       Get.snackbar('Error', e.toString());
+      print(e);
     } finally {
       isSending.value = false;
     }
