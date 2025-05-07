@@ -1,6 +1,11 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:tes_main/bindings/cart_binding.dart';
+import 'package:tes_main/bindings/medicine_binding.dart';
+import 'package:tes_main/routes/login_redirect_middleware.dart';
+import 'package:tes_main/views/consultation/medicine_details.dart';
+import '../views/order/cart_sreen.dart';
 import '../bindings/chat_binding.dart';
 import '../bindings/doctor_binding.dart';
 import '../views/consultation/doctor_chat_screen.dart';
@@ -25,10 +30,11 @@ class AppPages {
   static const HOME = '/home';
   static const ARTICLE = '/article';
   static const ARTICLE_DETAIL = '/article/detail';
-  static const DOCTOR = '/doctor';
+  static const CONSULTATION = '/consultation';
   static const CHAT = '/chat/:id';
+  static const CART = '/cart';
+  static const MEDICINE_DETAILS = '/medicine/detail';
   static const PROFILE = '/profile';
-
 
   static final routes = [
     GetPage(
@@ -40,16 +46,24 @@ class AppPages {
       name: LOGIN,
       page: () => LoginScreen(),
       binding: AuthBinding(),
+      middlewares: [LoginRedirectMiddleware()],
     ),
     GetPage(
       name: REGISTER,
       page: () => RegisterScreen(),
       binding: AuthBinding(),
+      middlewares: [LoginRedirectMiddleware()],
     ),
     GetPage(
       name: HOME,
       page: () => HomePage(),
       binding: HomeBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: PROFILE,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
@@ -65,22 +79,28 @@ class AppPages {
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
-      name: DOCTOR, 
+      name: CONSULTATION,
       page: () => DoctorScreen(),
       binding: DoctorBinding(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
-      name: CHAT, 
+      name: CHAT,
       page: () => DoctorChatScreen(),
       binding: ChatBinding(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(
-      name: PROFILE, 
-      page: () => ProfileScreen(),
-      binding: ProfileBinding(),
+      name: MEDICINE_DETAILS,
+      page: () => MedicineDetailScreen(),
+      binding: MedicineBinding(),
       middlewares: [AuthMiddleware()],
     ),
+    GetPage(
+      name: CART, 
+      page: () => CartScreen(),
+      binding: CartBinding(),
+      middlewares: [AuthMiddleware()],
+      )
   ];
 }

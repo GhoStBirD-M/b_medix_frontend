@@ -26,7 +26,6 @@ class ArticleService {
 
   Future<ArticleElement> getArticleDetail(int id) async {
     final token = box.read('token');
-    
     final response = await http.get(
       Uri.parse('${Constants.BASE_URL}${Constants.ARTICLE_DETAIL_ENDPOINT}$id'),
       headers: {

@@ -79,7 +79,7 @@ class BottomNavigation extends StatelessWidget {
               Get.offAllNamed(AppPages.HOME);
               break;
             case 1:
-              Get.offAllNamed(AppPages.DOCTOR);
+              Get.offAllNamed(AppPages.CONSULTATION);
               break;
             case 2:
               Get.offAllNamed(AppPages.ARTICLE);

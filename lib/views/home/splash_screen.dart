@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
-import '../auth/login_screen.dart';
+import 'package:tes_main/routes/app_pages.dart';
 import 'dart:async';
-import 'home_page.dart';
+
+import 'package:tes_main/utils/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,15 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         final token = box.read('token');
         if (token != null && token != '') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );
+          Get.offAllNamed(AppPages.HOME);
         } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
-          );
+          Get.offAllNamed(AppPages.LOGIN);
         }
       },
     );
@@ -53,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Icon(
-                Icons.medical_services_outlined,
+                Icons.health_and_safety_sharp,
                 size: 80,
                 color: Color(0xFF00BF8E),
               ),
@@ -86,5 +82,17 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+}
+
+Future<bool> checkTokenValidity(String token) async {
+  try {
+    final response = await http.get(
+      Uri.parse('${Constants.BASE_URL}/check-auth'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    return response.statusCode == 200;
+  } catch (e) {
+    return false;
   }
 }

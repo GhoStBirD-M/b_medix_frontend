@@ -1,7 +1,7 @@
-import 'package:get/get.dart';
-import 'package:tes_main/routes/app_pages.dart';
-import '../../controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../routes/app_pages.dart';
+import '../../controllers/chat_controller.dart';
 
 class DoctorChatScreen extends StatefulWidget {
   const DoctorChatScreen({super.key});
@@ -51,7 +51,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                         Icons.arrow_back_ios_new,
                         color: Colors.black,
                       ),
-                      onPressed: () => Get.offAllNamed(AppPages.DOCTOR),
+                      onPressed: () => Get.offAllNamed(AppPages.CONSULTATION),
                     ),
                   ),
                   const Expanded(

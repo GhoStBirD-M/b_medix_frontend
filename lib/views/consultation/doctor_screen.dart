@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../routes/app_pages.dart';
 import '../../controllers/doctor_controller.dart';
 // import '../../routes/app_pages.dart';
 import '../../views/widgets/common/consult_tab_bar.dart';
@@ -62,7 +63,8 @@ class _DoctorScreenState extends State<DoctorScreen>
                     ),
                   ),
                 ),
-                const Icon(Icons.notifications_outlined),
+                IconButton(
+                    onPressed: () => Get.offAllNamed(AppPages.CART), icon: const Icon(Icons.shopping_cart_outlined)),
                 const SizedBox(width: 16),
               ],
             ),
@@ -91,13 +93,14 @@ class _DoctorScreenState extends State<DoctorScreen>
                           itemBuilder: (context, index) {
                             final doctor = controller.doctors[index];
                             return DoctorCard(
-                                imageUrl: 'assets/images/doc_icon.png',
-                                name: doctor.name,
-                                specialist: doctor.specialist,
-                                openTime: "08:00",
-                                closeTime: "17:00",
-                                onPressed: () => Get.toNamed('/chat/${doctor.id}'),
-                                );
+                              imageUrl: 'assets/images/doc_icon.png',
+                              name: doctor.name,
+                              specialist: doctor.specialist,
+                              openTime: "08:00",
+                              closeTime: "17:00",
+                              onPressed: () =>
+                                  Get.toNamed('/chat/${doctor.id}'),
+                            );
                           },
                         );
                       }),

@@ -6,9 +6,9 @@ class MedicineCard extends StatelessWidget {
   final Medicine medicine;
   
   const MedicineCard({
-    Key? key,
+    super.key,
     required this.medicine,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +69,6 @@ class MedicineCard extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
-                      ),
-                    ),
-                    Container(
-                      width: 28,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 18,
                       ),
                     ),
                   ],
