@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tes_main/views/consultation/medicine_detail.dart';
 import '../../controllers/medicine_controller.dart';
 import '../../views/widgets/medicine/medicine_cards.dart';
 
@@ -31,14 +32,14 @@ class MedicineTab extends StatelessWidget {
             ),
           ),
         ),
-        
+
         // Medicine Grid
         Expanded(
           child: Obx(() {
             if (medicineController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
             }
-            
+
             return GridView.builder(
               padding: const EdgeInsets.all(16),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -50,7 +51,11 @@ class MedicineTab extends StatelessWidget {
               itemCount: medicineController.medicines.length,
               itemBuilder: (context, index) {
                 final medicine = medicineController.medicines[index];
-                return MedicineCard(medicine: medicine);
+                return GestureDetector(onTap: () {
+                  Get.to(() => MedicineDetail());
+                  },
+                  child: MedicineCard(medicine: medicine),
+                );
               },
             );
           }),

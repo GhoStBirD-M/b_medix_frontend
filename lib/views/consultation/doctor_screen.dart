@@ -3,7 +3,7 @@ import '../../controllers/doctor_controller.dart';
 // import '../../routes/app_pages.dart';
 import '../../views/widgets/common/consult_tab_bar.dart';
 import '../../views/widgets/common/search_bar.dart';
-import '../../views/consultation/medicine_tabs.dart';
+import 'medicine_tabs.dart';
 import '../widgets/common/bottom_navigation.dart';
 import '../widgets/doctor/doctor_card.dart';
 // import './doctor_chat_screen.dart';
