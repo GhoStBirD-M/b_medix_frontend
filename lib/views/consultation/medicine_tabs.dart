@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tes_main/routes/app_pages.dart';
-import 'package:tes_main/views/consultation/medicine_details.dart';
 import '../../controllers/medicine_controller.dart';
 import '../../views/widgets/medicine/medicine_cards.dart';
 
