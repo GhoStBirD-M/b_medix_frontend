@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tes_main/routes/app_pages.dart';
 
 class MedicineDetailAppbar extends StatelessWidget {
   final String title;
@@ -20,9 +22,14 @@ class MedicineDetailAppbar extends StatelessWidget {
               color: Colors.lightBlue.shade100,
               borderRadius: BorderRadius.circular(25),
             ),
-            child: const Center(
-              child: Icon(Icons.arrow_back, color: Colors.black54),
-            ),
+            child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.black,
+                      ),
+                      onPressed: () => Get.offAllNamed(AppPages.DOCTOR),
+                    ),
+            
           ),
           Expanded(
             child: Center(
