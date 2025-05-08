@@ -29,19 +29,18 @@ class ArticleScreen extends StatelessWidget {
       backgroundColor: Colors.grey.shade100,
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());  
-        } else if (controller.articles.isEmpty) {
-          return const Center(child: Text('No articles found'));
+          return const Center(child: CircularProgressIndicator());
         } else {
           return RefreshIndicator(
             onRefresh: controller.fetchArticles,
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: 8),
               children: [
-                // Search Bar
-                CustomSearchBar(hintText: 'Search Articles'),
+                
+                CustomSearchBar(
+                    hintText: 'Search Articles',
+                    onChanged: controller.setSearchQuery),
 
-                // Heading
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   child: Text(
@@ -54,106 +53,111 @@ class ArticleScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Artikel List
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.articles.length,
-                  itemBuilder: (context, index) {
-                    final article = controller.articles[index];
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 2,
-                      child: InkWell(
-                        onTap: () {
-                          controller.fetchArticleDetail(article.id);
-                          Get.toNamed(AppPages.ARTICLE_DETAIL,
-                              arguments: article.id);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color(0x3F000000),
-                                blurRadius: 2,
-                                offset: Offset(0, 0),
-                                spreadRadius: 0,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              // Gambar artikel
-                              Container(
-                                width: 96,
-                                height: 63,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                  ),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://picsum.photos/200?random=${Random().nextInt(1000)}"),
-                                    fit: BoxFit.cover,
+                if (controller.articles.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 60),
+                    child: Center(child: Text('No articles found')),
+                  )
+                else
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.articles.length,
+                    itemBuilder: (context, index) {
+                      final article = controller.articles[index];
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 2,
+                        child: InkWell(
+                          onTap: () {
+                            controller.fetchArticleDetail(article.id);
+                            Get.toNamed(AppPages.ARTICLE_DETAIL,
+                                arguments: article.id);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0x3F000000),
+                                  blurRadius: 2,
+                                  offset: Offset(0, 0),
+                                  spreadRadius: 0,
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                // Gambar artikel
+                                Container(
+                                  width: 96,
+                                  height: 63,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(12),
+                                      bottomLeft: Radius.circular(12),
+                                    ),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://picsum.photos/200?random=${Random().nextInt(1000)}"),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(width: 14),
-                              // Detail artikel
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      article.title,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
+                                const SizedBox(width: 14),
+                                // Detail artikel
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        article.title,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 11,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      'By: ${article.author}',
-                                      style: const TextStyle(
-                                        color: Color(0xFF5E5E5E),
-                                        fontSize: 6,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400,
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        'By: ${article.author}',
+                                        style: const TextStyle(
+                                          color: Color(0xFF5E5E5E),
+                                          fontSize: 6,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      DateFormat('dd MMM yyyy')
-                                          .format(article.createdAt),
-                                      style: const TextStyle(
-                                        color: Color(0xFF5E5E5E),
-                                        fontSize: 6,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400,
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        DateFormat('dd MMM yyyy')
+                                            .format(article.createdAt),
+                                        style: const TextStyle(
+                                          color: Color(0xFF5E5E5E),
+                                          fontSize: 6,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  ),
               ],
             ),
           );

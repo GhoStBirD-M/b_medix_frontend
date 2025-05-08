@@ -6,22 +6,28 @@ class MedicineController extends GetxController {
   final MedicineService _apiService = MedicineService();
   
   // Observable variables
+  final RxList<Medicine> allMedicines = <Medicine>[].obs;
   final RxList<Medicine> medicines = <Medicine>[].obs;
   final Rx<Medicine?> selectedMedicine = Rx<Medicine?>(null);
   final RxBool isLoading = false.obs;
+
   final RxString searchQuery = ''.obs;
-  final RxBool isSearching = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     fetchMedicines();
+
+    debounce(searchQuery, (String query) {
+      filterMedicines(query);
+    }, time: const Duration(milliseconds: 300));
   }
 
   Future<void> fetchMedicines() async {
     try {
       isLoading.value = true;
       final List<Medicine> result = await _apiService.getMedicines();
+      allMedicines.value = result;
       medicines.value = result;
     } catch (e) {
       Get.snackbar(
@@ -32,6 +38,21 @@ class MedicineController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void filterMedicines(String query) {
+    if (query.isEmpty) {
+      medicines.value = allMedicines;
+    } else {
+    medicines.value = allMedicines
+        .where((medicine) =>
+            medicine.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    }
+  }
+
+  void setSearchQuery(String query) {
+    searchQuery.value = query;
   }
 
   Future<void> fetchMedicineDetails(int id) async {

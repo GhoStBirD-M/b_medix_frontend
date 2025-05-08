@@ -70,23 +70,22 @@ class _DoctorScreenState extends State<DoctorScreen>
             ),
           ),
 
-          // Tab Bar
           ConsultationTabBar(tabController: _tabController),
 
-          // Content
           Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
                 Column(
                   children: [
-                    // Search Bar
-                    CustomSearchBar(hintText: 'Search for doctors'),
+                    CustomSearchBar(hintText: 'Search for doctors', onChanged: controller.setSearchQuery),
                     Expanded(
                       child: Obx(() {
                         if (controller.isLoading.value) {
                           return const Center(
                               child: CircularProgressIndicator());
+                        } else if (controller.doctors.isEmpty) {
+                          return const Center(child: Text('No doctors found'));
                         }
                         return ListView.builder(
                           itemCount: controller.doctors.length,
