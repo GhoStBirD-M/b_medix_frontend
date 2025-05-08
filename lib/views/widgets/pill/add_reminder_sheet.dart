@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../models/medicine_reminder.dart';
+import '../../../models/pill_reminder.dart';
 import '../../widgets/pill/frequency_chip.dart';
 import '../../../theme/app_theme.dart';
 
 class AddReminderSheet extends StatefulWidget {
-  final Function(MedicineReminder) onAddReminder;
+  final Function(PillReminder) onAddReminder;
 
   const AddReminderSheet({
     Key? key,
@@ -63,11 +64,9 @@ class _AddReminderSheetState extends State<AddReminderSheet> {
 
   void _addReminder() {
     if (_medicineNameController.text.trim().isNotEmpty) {
-      final newReminder = MedicineReminder(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
+      final newReminder = PillReminder.create(
         medicineName: _medicineNameController.text.trim(),
         time: _selectedTime,
-        isCompleted: false,
         notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
         frequency: _selectedFrequency,
       );

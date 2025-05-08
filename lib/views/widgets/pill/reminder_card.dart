@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../models/medicine_reminder.dart';
+import '../../../models/pill_reminder.dart';
 import '../../../theme/app_theme.dart';
 
 class ReminderCard extends StatelessWidget {
-  final MedicineReminder reminder;
-  final Function(String) onToggle;
-  final Function(String) onDelete;
+  final PillReminder reminder;
+  final VoidCallback onToggle;
+  final VoidCallback onDelete;
 
   const ReminderCard({
     Key? key,
@@ -16,6 +17,8 @@ class ReminderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final timeOfDay = PillReminder.stringToTimeOfDay(reminder.time);
+    
     return Dismissible(
       key: Key(reminder.id),
       direction: DismissDirection.endToStart,
@@ -29,7 +32,7 @@ class ReminderCard extends StatelessWidget {
         child: const Icon(Icons.delete, color: Colors.white),
       ),
       onDismissed: (direction) {
-        onDelete(reminder.id);
+        onDelete();
       },
       child: Card(
         child: Padding(
@@ -71,7 +74,7 @@ class ReminderCard extends StatelessWidget {
                         const Icon(Icons.access_time, size: 16, color: Colors.grey),
                         const SizedBox(width: 4),
                         Text(
-                          reminder.time.format(context),
+                          timeOfDay.format(context),
                           style: const TextStyle(
                             color: Colors.grey,
                           ),
@@ -108,7 +111,7 @@ class ReminderCard extends StatelessWidget {
               Checkbox(
                 value: reminder.isCompleted,
                 onChanged: (value) {
-                  onToggle(reminder.id);
+                  onToggle();
                 },
                 activeColor: AppTheme.successColor,
                 shape: RoundedRectangleBorder(
