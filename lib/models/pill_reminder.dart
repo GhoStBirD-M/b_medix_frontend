@@ -69,8 +69,8 @@ class PillReminder {
       medicineName: json['medicineName'],
       time: json['time'],
       isCompleted: json['isCompleted'],
-      notes: json['notes'],
-      frequency: json['frequency'],
+      notes: json['notes'] ?? '',
+      frequency: json['frequency'] ?? 'Setiap hari',
     );
   }
 

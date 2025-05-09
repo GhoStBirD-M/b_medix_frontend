@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:tes_main/services/notification_service.dart';
+import 'package:timezone/timezone.dart' as tz;
 import '../../models/pill_reminder.dart';
 import '../../services/pill_service.dart';
 import '../widgets/pill/reminder_card.dart';
@@ -28,7 +31,7 @@ class _PillReminderScreenState extends State<PillReminderScreen> {
     setState(() {
       _isLoading = true;
     });
-    
+
     try {
       final pills = await _pillService.getPills();
       setState(() {
@@ -105,9 +108,7 @@ class _PillReminderScreenState extends State<PillReminderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
-      appBar: AppBar(
-        title: const Text('B-Medix'),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
@@ -132,6 +133,35 @@ class _PillReminderScreenState extends State<PillReminderScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    ElevatedButton(
+                        onPressed: () async {
+                          await NotificationService()
+                              .flutterLocalNotificationsPlugin
+                              .zonedSchedule(
+                                999,
+                                'Test Notification',
+                                'Ini adalah notifikasi percobaan',
+                                tz.TZDateTime.now(tz.local)
+                                    .add(Duration(seconds: 5)),
+                                const NotificationDetails(
+                                  android: AndroidNotificationDetails(
+                                    'test_channel',
+                                    'Test Notifications',
+                                    channelDescription:
+                                        'Channel tes notifikasi',
+                                    importance: Importance.high,
+                                    priority: Priority.high,
+                                  ),
+                                  iOS: DarwinNotificationDetails(),
+                                ),
+                                androidScheduleMode:
+                                    AndroidScheduleMode.exactAllowWhileIdle,
+                                uiLocalNotificationDateInterpretation:
+                                    UILocalNotificationDateInterpretation
+                                        .absoluteTime,
+                              );
+                        },
+                        child: Text('Tes Notifikasi')),
                     const SizedBox(height: 16),
                     _reminders.isEmpty
                         ? EmptyReminderState(
@@ -141,7 +171,8 @@ class _PillReminderScreenState extends State<PillReminderScreen> {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: _reminders.length,
-                            separatorBuilder: (context, index) => const SizedBox(height: 12),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 12),
                             itemBuilder: (context, index) {
                               final reminder = _reminders[index];
                               return ReminderCard(

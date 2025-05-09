@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../models/medicine_reminder.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +17,9 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
+    final androidImplementation = flutterLocalNotificationsPlugin
+    .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+
     tz.initializeTimeZones();
     
     const AndroidInitializationSettings initializationSettingsAndroid =
@@ -33,7 +40,22 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
     );
+
+    await androidImplementation?.requestPermission();
+
+    await _requestExactAlarmPermission();
   }
+
+  Future<void> _requestExactAlarmPermission() async {
+  if (Platform.isAndroid) {
+    final intent = AndroidIntent(
+      action: 'android.settings.REQUEST_SCHEDULE_EXACT_ALARM',
+      flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+    );
+    await intent.launch();
+  }
+}
+
 
   Future<void> scheduleNotification(MedicineReminder reminder) async {
     final now = DateTime.now();
@@ -51,7 +73,7 @@ class NotificationService {
         : scheduledDate;
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      int.parse(reminder.id),
+      reminder.id.hashCode.abs(),
       'Waktunya minum obat',
       'Jangan lupa minum ${reminder.medicineName}',
       tz.TZDateTime.from(notificationTime, tz.local),
@@ -74,6 +96,6 @@ class NotificationService {
   }
 
   Future<void> cancelNotification(String id) async {
-    await flutterLocalNotificationsPlugin.cancel(int.parse(id));
+    await flutterLocalNotificationsPlugin.cancel(id.hashCode.abs());
   }
 }

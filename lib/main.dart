@@ -4,9 +4,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/home_controller.dart';
 import '../routes/app_pages.dart';
+import 'services/notification_service.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await NotificationService().init();
   Get.put(HomeController());
   runApp(
     DevicePreview(
