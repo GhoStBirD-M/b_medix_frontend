@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,7 +10,9 @@ import 'services/notification_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  await NotificationService().init();
+   if (!kIsWeb) {
+    await NotificationService().init(); // <-- jalankan hanya jika bukan Web
+  }
   Get.put(HomeController());
   runApp(
     DevicePreview(
