@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../routes/app_pages.dart';
 
 class Header extends StatelessWidget {
   final String greeting;
@@ -30,7 +32,6 @@ class Header extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           
-          // Greeting and name
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,18 +55,18 @@ class Header extends StatelessWidget {
             ),
           ),
           
-          // Notification icon
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
             color: Colors.black,
             onPressed: () {},
           ),
           
-          // Cart icon
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppPages.CART);
+            },
           ),
         ],
       ),

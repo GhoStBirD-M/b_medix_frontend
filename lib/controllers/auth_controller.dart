@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../models/user_model.dart';
 import '../routes/app_pages.dart';
 import '../services/auth_service.dart';
@@ -13,6 +14,11 @@ class AuthController extends GetxController {
 
   final Rx<User?> user = Rx<User?>(null);
   final Rx<bool> isLoading = false.obs;
+
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    clientId:
+        '342399681963-77hp0qlgm0jf1tdpk2q71cbqdgs8b45m.apps.googleusercontent.com',
+  );
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -42,7 +48,7 @@ class AuthController extends GetxController {
       );
       return;
     }
-    
+
     try {
       isLoading.value = true;
       final result = await _authService.login(
@@ -52,7 +58,7 @@ class AuthController extends GetxController {
       user.value = result;
       Get.offAllNamed(AppPages.HOME);
     } catch (e) {
-      Get.snackbar('Error', e.toString(),snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
       emailController.clear();

@@ -50,7 +50,7 @@ class Cart {
     });
   }
 
-  double get deliveryFee => 8000;
+  double get deliveryFee => 10000;
   
   double get total => subtotal + deliveryFee;
 }

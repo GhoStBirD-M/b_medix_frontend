@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/routes/app_pages.dart';
-import 'package:tes_main/views/widgets/common/search_bar.dart';
+import '../../routes/app_pages.dart';
+import '../../views/widgets/common/search_bar.dart';
 import '../../controllers/medicine_controller.dart';
 import '../../views/widgets/medicine/medicine_cards.dart';
 

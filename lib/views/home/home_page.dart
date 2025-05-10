@@ -43,12 +43,11 @@ class _HomePageState extends State<HomePage> {
           return Column(
             children: [
               Header(
-                greeting: 'Good Morning!',
+                greeting: 'How was Ur Health?',
                 name: user.name,
                 avatarUrl: '/placeholder.svg',
               ),
 
-              // Main content
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -58,7 +57,6 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const SizedBox(height: 16),
 
-                        // Banner
                         SizedBox(
                           height: 180,
                           child: PageView(

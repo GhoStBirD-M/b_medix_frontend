@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
+import '../../models/orders_model.dart';
 import '../models/cart_model.dart';
 import '../models/cart_item_model.dart';
 import '../services/cart_service.dart';
 
 class CartController extends GetxController {
   final CartService _cartService = CartService();
-  
+
   final Rx<Cart?> _cart = Rx<Cart?>(null);
+  final Rx<Orders?> order = Rx<Orders?>(null);
   final RxBool isLoading = false.obs;
   final RxBool isUpdating = false.obs;
 
@@ -33,6 +35,7 @@ class CartController extends GetxController {
         'Failed to load cart: ${e.toString()}',
         snackPosition: SnackPosition.BOTTOM,
       );
+      print(e);
     } finally {
       isLoading.value = false;
     }
@@ -51,7 +54,6 @@ class CartController extends GetxController {
         );
       }
     } catch (e) {
-      print(e);
       Get.snackbar(
         'Error',
         'Failed to add item to cart: ${e.toString()}',
@@ -70,7 +72,8 @@ class CartController extends GetxController {
 
     try {
       isUpdating.value = true;
-      final success = await _cartService.updateCartItemQuantity(item.id, newQuantity);
+      final success =
+          await _cartService.updateCartItemQuantity(item.id, newQuantity);
       if (success) {
         await fetchCart();
       }
@@ -116,29 +119,20 @@ class CartController extends GetxController {
     }
   }
 
-  // Future<void> checkout() async {
-  //   try {
-  //     isUpdating.value = true;
-  //     final success = await _cartService.checkout();
-  //     if (success) {
-  //       _cart.value = null;
-  //       Get.snackbar(
-  //         'Success',
-  //         'Checkout completed successfully',
-  //         snackPosition: SnackPosition.BOTTOM,
-  //       );
-  //       // Navigate to order confirmation or home page
-  //       // Get.offNamed('/order-confirmation');
-  //     }
-  //   } catch (e) {
-  //     Get.snackbar(
-  //       'Error',
-  //       'Checkout failed: ${e.toString()}',
-  //       snackPosition: SnackPosition.BOTTOM,
-  //     );
-  //   } finally {
-  //     isUpdating.value = false;
-  //   }
-  // }
-  
+  Future<void> checkoutCart(String paymentMethod) async {
+    try {
+      isLoading.value = true;
+      final result = await _cartService.checkoutCart(paymentMethod);
+      order.value = result;
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      print(e);
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }

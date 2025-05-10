@@ -1,13 +1,11 @@
 import 'package:get/get.dart';
 import '../../routes/app_pages.dart';
 import '../../controllers/doctor_controller.dart';
-// import '../../routes/app_pages.dart';
 import '../../views/widgets/common/consult_tab_bar.dart';
 import '../../views/widgets/common/search_bar.dart';
 import '../../views/consultation/medicine_tabs.dart';
 import '../widgets/common/bottom_navigation.dart';
 import '../widgets/doctor/doctor_card.dart';
-// import './doctor_chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class DoctorScreen extends StatefulWidget {
@@ -64,7 +62,7 @@ class _DoctorScreenState extends State<DoctorScreen>
                   ),
                 ),
                 IconButton(
-                    onPressed: () => Get.offAllNamed(AppPages.CART), icon: const Icon(Icons.shopping_cart_outlined)),
+                    onPressed: () => Get.toNamed(AppPages.CART), icon: const Icon(Icons.shopping_cart_outlined)),
                 const SizedBox(width: 16),
               ],
             ),

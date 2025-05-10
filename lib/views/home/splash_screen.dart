@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tes_main/routes/app_pages.dart';
+import '../../routes/app_pages.dart';
 import 'dart:async';
 
-import 'package:tes_main/utils/constants.dart';
+import '../../utils/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

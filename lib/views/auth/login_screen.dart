@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                const GoogleSignInButton(),
+                GoogleSignInButton(),
                 const SizedBox(height: 24),
                 const AuthDivider(text: 'Or Sign In With Email'),
                 const SizedBox(height: 24),

@@ -39,10 +39,10 @@ class Medicine {
     return Medicine(
       id: json['id'],
       disease: json['disease'],
-      imageUrl: 'https://b-medix.im-fall.my.id/storage/${json['image']}',
+      imageUrl: json['image'],
       name: json['name'],
       description: json['description'],
-      price: json['price'],
+      price: json['price'].toString(),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
     );

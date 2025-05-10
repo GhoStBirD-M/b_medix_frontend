@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:tes_main/controllers/cart_controller.dart';
+import '../../controllers/cart_controller.dart';
 import '../controllers/medicine_controller.dart';
 
 class MedicineBinding extends Bindings {

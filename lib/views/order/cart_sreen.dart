@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../routes/app_pages.dart';
 import '../../views/widgets/order/cart_item.dart';
 import '../../views/widgets/order/cart_summary.dart';
 import '../../controllers/cart_controller.dart';
@@ -35,10 +34,10 @@ class CartScreen extends StatelessWidget {
               color: const Color(0xFFD4E6E6),
               borderRadius: BorderRadius.circular(25),
             ),
-            child:
-                IconButton(icon: Icon(Icons.arrow_back_ios, color: Colors.black), onPressed: () => Get.offAllNamed(AppPages.CONSULTATION)),
+            child: IconButton(
+                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                onPressed: () => Get.back()),
           ),
-          
         ),
       ),
       body: Obx(() {
@@ -61,10 +60,12 @@ class CartScreen extends StatelessWidget {
                 },
               ),
             ),
-            SafeArea(bottom: true, child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: CartSummary(),
-            )),
+            SafeArea(
+                bottom: true,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: CartSummary(),
+                )),
           ],
         );
       }),

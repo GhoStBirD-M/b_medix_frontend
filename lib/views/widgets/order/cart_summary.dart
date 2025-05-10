@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../views/order/checkout_screen.dart';
 import '../../../controllers/cart_controller.dart';
 
 class CartSummary extends StatelessWidget {
@@ -25,7 +25,6 @@ class CartSummary extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Subtotal
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -46,7 +45,6 @@ class CartSummary extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          // Delivery Fee
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -67,7 +65,6 @@ class CartSummary extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          // Total
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -88,12 +85,13 @@ class CartSummary extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          // Checkout Button
           SizedBox(
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => CheckoutScreen(totalAmount: cartController.total,));
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF0BAB7C),
                 shape: RoundedRectangleBorder(

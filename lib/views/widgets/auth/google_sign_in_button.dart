@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../controllers/auth_controller.dart';
 
 class GoogleSignInButton extends StatelessWidget {
-  const GoogleSignInButton({super.key});
+  GoogleSignInButton({super.key});
+  final googleController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class GoogleSignInButton extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () {
-          // Handle Google sign in
+          // googleController.loginWithGoogle();
         },
         style: TextButton.styleFrom(
           shape: RoundedRectangleBorder(
