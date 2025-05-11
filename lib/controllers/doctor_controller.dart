@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/doctor_model.dart';
 import '../services/doctor_service.dart';
@@ -29,7 +30,10 @@ class DoctorController extends GetxController {
       allDoctors.value = result.doctors;
       doctors.value = result.doctors;
     } catch (e) {
-      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
     }
@@ -57,7 +61,10 @@ class DoctorController extends GetxController {
       final result = await _apiService.getDoctor(id);
       selectedDoctor.value = result;
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
     }

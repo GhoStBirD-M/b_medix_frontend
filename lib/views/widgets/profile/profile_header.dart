@@ -44,12 +44,12 @@ class ProfileHeader extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 40), // Balance the layout
+                  const SizedBox(width: 30), // Balance the layout
                 ],
               ),
             ),

@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:tes_main/views/order/orders_screen.dart';
 import '../../bindings/cart_binding.dart';
 import '../../bindings/medicine_binding.dart';
 import '../../routes/login_redirect_middleware.dart';
@@ -31,9 +32,10 @@ class AppPages {
   static const ARTICLE = '/article';
   static const ARTICLE_DETAIL = '/article/detail';
   static const CONSULTATION = '/consultation';
+  static const MEDICINE_DETAILS = '/medicine/detail';
   static const CHAT = '/chat/:id';
   static const CART = '/cart';
-  static const MEDICINE_DETAILS = '/medicine/detail';
+  static const ORDERS = '/orders';
   static const PROFILE = '/profile';
 
   static final routes = [
@@ -100,6 +102,11 @@ class AppPages {
       name: CART,
       page: () => CartScreen(),
       binding: CartBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: ORDERS,
+      page: () => OrdersScreen(),
       middlewares: [AuthMiddleware()],
     ),
   ];

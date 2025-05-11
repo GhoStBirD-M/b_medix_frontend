@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/medicine_model.dart';
 import '../services/medicine_service.dart';
@@ -33,6 +34,8 @@ class MedicineController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to load medicines: $e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -64,6 +67,8 @@ class MedicineController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to load medicine details: $e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {

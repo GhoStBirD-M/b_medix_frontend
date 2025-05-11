@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/article_service.dart';
 import '../models/article_model.dart';
@@ -10,7 +11,7 @@ class ArticleController extends GetxController {
   final RxList<ArticleElement> articles = <ArticleElement>[].obs;
   final Rx<ArticleElement?> selectedArticle = Rx<ArticleElement?>(null);
 
-  final RxString searchQuery  = ''.obs;
+  final RxString searchQuery = ''.obs;
 
   @override
   void onInit() {
@@ -32,6 +33,8 @@ class ArticleController extends GetxController {
       Get.snackbar(
         'Error',
         e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -65,6 +68,8 @@ class ArticleController extends GetxController {
       Get.snackbar(
         'Error',
         e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {

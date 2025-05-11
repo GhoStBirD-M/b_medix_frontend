@@ -77,4 +77,22 @@ class AuthService {
       throw Exception('Failed to logout');
     }
   }
+
+  Future<void> deleteAccount() async {
+    final token = box.read('token');
+
+    final response = await http.delete(
+      Uri.parse('${Constants.BASE_URL}${Constants.DELETE_ACCOUNT_ENDPOINT}'),
+      headers: {
+        'Content-Type': 'Application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      box.remove('token');
+      box.remove('user');
+    } else {
+      throw Exception('Failed to delete account');
+    }
+  }
 }

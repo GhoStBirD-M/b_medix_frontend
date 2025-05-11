@@ -162,6 +162,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             Get.snackbar(
                               'Error',
                               e.toString(),
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white,
                               snackPosition: SnackPosition.BOTTOM,
                             );
                           }

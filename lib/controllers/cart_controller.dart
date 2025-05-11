@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/orders_model.dart';
 import '../models/cart_model.dart';
@@ -33,6 +34,8 @@ class CartController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to load cart: ${e.toString()}',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
       print(e);
@@ -50,6 +53,8 @@ class CartController extends GetxController {
         Get.snackbar(
           'Success',
           'Item added to cart',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
         );
       }
@@ -57,6 +62,8 @@ class CartController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to add item to cart: ${e.toString()}',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -81,6 +88,8 @@ class CartController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to update quantity: ${e.toString()}',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -105,6 +114,8 @@ class CartController extends GetxController {
         Get.snackbar(
           'Success',
           'Item removed from cart',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
         );
       }
@@ -112,6 +123,8 @@ class CartController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to remove item: ${e.toString()}',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -128,6 +141,8 @@ class CartController extends GetxController {
       Get.snackbar(
         'Error',
         e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
       print(e);

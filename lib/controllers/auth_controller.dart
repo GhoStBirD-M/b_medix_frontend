@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../models/user_model.dart';
 import '../routes/app_pages.dart';
 import '../services/auth_service.dart';
@@ -14,11 +13,7 @@ class AuthController extends GetxController {
 
   final Rx<User?> user = Rx<User?>(null);
   final Rx<bool> isLoading = false.obs;
-
-  final GoogleSignIn googleSignIn = GoogleSignIn(
-    clientId:
-        '342399681963-77hp0qlgm0jf1tdpk2q71cbqdgs8b45m.apps.googleusercontent.com',
-  );
+  final RxBool isDeleting = false.obs;
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -43,7 +38,9 @@ class AuthController extends GetxController {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
       Get.snackbar(
         'Error',
-        'Please enter email and password',
+        'Please fill in all fields',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
       return;
@@ -58,7 +55,10 @@ class AuthController extends GetxController {
       user.value = result;
       Get.offAllNamed(AppPages.HOME);
     } catch (e) {
-      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
       emailController.clear();
@@ -67,10 +67,35 @@ class AuthController extends GetxController {
   }
 
   Future<void> register() async {
+    String email = emailController.text;
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        confirmPasswordController.text.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Please fill in all fields',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+    if (!isValidEmail(email)) {
+      Get.snackbar(
+        'Error',
+        'Format email tidak valid',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
     if (passwordController.text != confirmPasswordController.text) {
       Get.snackbar(
         "Error",
         "Passwords do not match",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
 
@@ -86,7 +111,10 @@ class AuthController extends GetxController {
       user.value = result;
       Get.offAllNamed(AppPages.LOGIN);
     } catch (e) {
-      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
       nameController.clear();
@@ -103,9 +131,38 @@ class AuthController extends GetxController {
       user.value = null;
       Get.offAllNamed(AppPages.LOGIN);
     } catch (e) {
-      Get.snackbar('error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      isDeleting.value = true;
+      Get.dialog(
+        const Center(child: CircularProgressIndicator()),
+        barrierDismissible: false,
+      );
+      await _authService.deleteAccount();
+
+      Get.back(); // tutup loading dialog
+      Get.offAllNamed('/login'); // redirect ke login
+      Get.snackbar('Success', 'Your account has been deleted',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+    } catch (e) {
+      Get.back(); // tutup loading dialog
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+    } finally {
+      isDeleting.value = false;
     }
   }
 
@@ -116,5 +173,12 @@ class AuthController extends GetxController {
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.onClose();
+  }
+
+  bool isValidEmail(String email) {
+    RegExp emailRegExp = RegExp(
+      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+    );
+    return emailRegExp.hasMatch(email);
   }
 }

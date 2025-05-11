@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/chat_model.dart';
 import '../services/chat_service.dart';
@@ -46,7 +46,10 @@ class ChatController extends GetxController {
           await _apiService.getChatHistory(doctorId.value);
       messages.value = chatHistory;
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
     }
@@ -56,6 +59,8 @@ class ChatController extends GetxController {
     if (message.trim().isEmpty) return;
     if (doctorId.value == 0) {
       Get.snackbar('Error', 'Target doctor is not set',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM);
       return;
     }
@@ -70,7 +75,10 @@ class ChatController extends GetxController {
       // await Future.delayed(const Duration(seconds: 1));
       fetchChatHistory();
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
       print(e);
     } finally {
       isSending.value = false;

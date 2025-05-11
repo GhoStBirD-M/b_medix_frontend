@@ -57,12 +57,11 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Obx(() => controller.isLoading.value
-                  ? Center(child: const CircularProgressIndicator())                  
-                  :CustomButton(
-                      text: 'Register',
-                      onPressed: controller.register,                
-                    ) 
-                ),
+                    ? Center(child: const CircularProgressIndicator())
+                    : CustomButton(
+                        text: 'Register',
+                        onPressed: controller.register,
+                      )),
                 const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

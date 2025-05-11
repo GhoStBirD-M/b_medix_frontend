@@ -25,7 +25,7 @@ class Orders {
     return Orders(
       id: json['id'],
       userId: json['user_id'],
-      totalPrice: json['total_price'].toDouble(),
+      totalPrice: double.tryParse(json['total_price'].toString()) ?? 0.0,
       status: json['status'],
       paymentMethod: json['payment_method'],
       createdAt: DateTime.parse(json['created_at']),
