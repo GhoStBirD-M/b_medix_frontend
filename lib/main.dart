@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../controllers/home_controller.dart';
 import '../routes/app_pages.dart';
+import 'models/prescription.dart';
 import 'services/notification_service.dart';
 
 void main() async {
@@ -13,6 +15,10 @@ void main() async {
    if (!kIsWeb) {
     await NotificationService().init(); // <-- jalankan hanya jika bukan Web
   }
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(PrescriptionAdapter());
+  await Hive.openBox<Prescription>('prescriptions');
   Get.put(HomeController());
   runApp(
     DevicePreview(

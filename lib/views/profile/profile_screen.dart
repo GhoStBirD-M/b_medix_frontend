@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:tes_main/views/profile/pill_reminder_screen.dart';
+import 'package:tes_main/views/profile/prescription_list_screen.dart';
 import '../../controllers/auth_controller.dart';
 import '../widgets/profile/profile_header.dart';
 import '../widgets/profile/menu_item.dart';
@@ -47,10 +48,17 @@ class ProfileScreen extends StatelessWidget {
                       title: "My Wishlist",
                       iconColor: Colors.black,
                     ),
-                    const MenuItem(
+                    MenuItem(
                       icon: Icons.receipt_long_outlined,
                       title: "My Prescription",
                       iconColor: Colors.black,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PrescriptionListScreen()));
+                      },
                     ),
                     const MenuItem(
                       icon: Icons.science_outlined,
