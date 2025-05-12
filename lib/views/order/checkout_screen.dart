@@ -141,34 +141,35 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ],
             ),
-            const Spacer(),
-            Obx(() => PrimaryButton(
-                  text: 'Pay',
-                  isLoading: cartController.isLoading.value,
-                  onPressed: selectedPaymentMethod == null
-                      ? null
-                      : () async {
-                          try {
-                            await cartController
-                                .checkoutCart(selectedPaymentMethod!);
-                            if (selectedPaymentMethod == 'qris') {
-                              Get.to(QrisPaymentScreen(
-                                  amount: widget.totalAmount));
-                            } else if (selectedPaymentMethod == 'tunai') {
-                              Get.to(SuccessScreen(
-                                  paymentMethod: selectedPaymentMethod!));
+            SafeArea(
+              child: Obx(() => PrimaryButton(
+                    text: 'Pay',
+                    isLoading: cartController.isLoading.value,
+                    onPressed: selectedPaymentMethod == null
+                        ? null
+                        : () async {
+                            try {
+                              await cartController
+                                  .checkoutCart(selectedPaymentMethod!);
+                              if (selectedPaymentMethod == 'qris') {
+                                Get.to(QrisPaymentScreen(
+                                    amount: widget.totalAmount));
+                              } else if (selectedPaymentMethod == 'tunai') {
+                                Get.to(SuccessScreen(
+                                    paymentMethod: selectedPaymentMethod!));
+                              }
+                            } catch (e) {
+                              Get.snackbar(
+                                'Error',
+                                e.toString(),
+                                backgroundColor: Colors.red,
+                                colorText: Colors.white,
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
                             }
-                          } catch (e) {
-                            Get.snackbar(
-                              'Error',
-                              e.toString(),
-                              backgroundColor: Colors.red,
-                              colorText: Colors.white,
-                              snackPosition: SnackPosition.BOTTOM,
-                            );
-                          }
-                        },
-                )),
+                          },
+                  )),
+            ),
           ],
         ),
       ),

@@ -215,10 +215,10 @@ class MedicineDetailScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: cartController.isUpdating.value
                       ? null
-                      : () {
+                      : () async {
                           final medicine = controller.selectedMedicine.value;
                           if (medicine != null) {
-                            cartController.addToCart(medicine.id, 1);
+                            await cartController.addToCart(medicine.id, 1);
                             Get.toNamed(AppPages.CART);
                           }
                         },

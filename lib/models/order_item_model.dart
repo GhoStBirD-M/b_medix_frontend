@@ -27,7 +27,7 @@ class OrderItemModel {
       orderId: json['order_id'],
       medicineId: json['medicine_id'],
       quantity: json['quantity'],
-      price: json['price'].toDouble(),
+      price: double.tryParse(json['price'].toString()) ?? 0.0,
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
       medicine: Medicine.fromJson(json['medicine']),
