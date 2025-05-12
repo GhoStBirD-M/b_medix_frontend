@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tes_main/models/orders_model.dart';
-import 'package:tes_main/views/widgets/order/order_item_card.dart';
+import '../../../models/orders_model.dart';
+import '../../../views/widgets/order/order_item_card.dart';
 
 class OrderItemsList extends StatelessWidget {
   final Orders order;

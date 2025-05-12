@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:tes_main/views/order/orders_screen.dart';
+import '../views/order/orders_screen.dart';
 import '../../bindings/cart_binding.dart';
 import '../../bindings/medicine_binding.dart';
 import '../../routes/login_redirect_middleware.dart';

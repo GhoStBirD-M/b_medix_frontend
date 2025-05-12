@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/views/widgets/order/order_info_card.dart';
-import 'package:tes_main/views/widgets/order/order_item_list.dart';
+import '../../views/widgets/order/order_info_card.dart';
+import '../../views/widgets/order/order_item_list.dart';
 import '../../controllers/order_controller.dart';
 import '../../models/orders_model.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/routes/app_pages.dart';
+import '../../routes/app_pages.dart';
+import '../../views/profile/pill_reminder_screen.dart';
 import '../../controllers/auth_controller.dart';
 import '../widgets/profile/profile_header.dart';
 import '../widgets/profile/menu_item.dart';
@@ -71,6 +72,7 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.alarm_outlined,
                       title: "Pill Reminder",
                       iconColor: Colors.black,
+                      onTap: () => Get.to(PillReminderScreen()),
                     ),
                     MenuItem(
                       icon: Icons.person_add_outlined,
@@ -87,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                             title: const Text("Confirm Logout"),
                             backgroundColor: Colors.white,
                             content: const SizedBox(
-                              width: 300, // atur lebar di sini
+                              width: 300,
                               child: Text(
                                   "Are you sure you want to Logout?"),
                             ),

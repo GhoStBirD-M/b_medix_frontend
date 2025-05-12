@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/views/widgets/order/order_card.dart';
+import '../../views/widgets/order/order_card.dart';
 import '../../controllers/order_controller.dart';
 
 class OrdersScreen extends StatelessWidget {

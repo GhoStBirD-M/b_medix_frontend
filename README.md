@@ -1,6 +1,6 @@
-# tes_main
+# B-Medix
 
-A new Flutter project.
+Your Personal Health Assistant
 
 ## Getting Started
 
