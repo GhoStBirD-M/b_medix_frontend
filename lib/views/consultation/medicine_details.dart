@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tes_main/routes/app_pages.dart';
 import '../../controllers/cart_controller.dart';
 import '../../controllers/medicine_controller.dart';
 
@@ -212,7 +213,15 @@ class MedicineDetailScreen extends StatelessWidget {
               const SizedBox(width: 15),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: cartController.isUpdating.value
+                      ? null
+                      : () {
+                          final medicine = controller.selectedMedicine.value;
+                          if (medicine != null) {
+                            cartController.addToCart(medicine.id, 1);
+                            Get.toNamed(AppPages.CART);
+                          }
+                        },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     backgroundColor: Color(0xFF0BAB7C),

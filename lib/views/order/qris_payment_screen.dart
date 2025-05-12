@@ -109,9 +109,8 @@ class _QrisPaymentScreenState extends State<QrisPaymentScreen> {
                         ),
                       ],
                     ),
-                    child: const Icon(
-                      Icons.qr_code,
-                      size: 200,
+                    child: Image.asset(
+                      'images/qris.jpg',
                     ),
                   ),
                   const SizedBox(height: 24),
