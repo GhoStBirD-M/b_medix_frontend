@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controllers/article_controller.dart';
+import '../../views/widgets/article/article_card.dart';
+import '../../views/widgets/article/article_card_shimmer.dart';
+import '../../views/widgets/medicine/medicine_cards_shimmer.dart';
+import '../../views/widgets/medicine/medicine_cards.dart';
+import '../../controllers/medicine_controller.dart';
 import '../../routes/app_pages.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/home_controller.dart';
-import '../widgets/article/article_card.dart';
 import '../widgets/common/bottom_navigation.dart';
 import '../widgets/common/header.dart';
-import '../widgets/common/product_card.dart';
 import '../widgets/common/promotion_banner.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,12 +24,21 @@ class _HomePageState extends State<HomePage> {
   int _currentBannerIndex = 0;
   final PageController _bannerController = PageController();
   final HomeController homeController = Get.find<HomeController>();
+  final MedicineController medicineController = Get.put(MedicineController());
+  final ArticleController articleController = Get.put(ArticleController());
   final AuthController authController = Get.find<AuthController>();
 
   @override
   void dispose() {
     _bannerController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Get.find<MedicineController>().fetchTopMedicines();
+    Get.find<ArticleController>().fetchTopArticles();
   }
 
   @override
@@ -47,7 +60,6 @@ class _HomePageState extends State<HomePage> {
                 name: user.name,
                 avatarUrl: '/placeholder.svg',
               ),
-
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -57,55 +69,57 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const SizedBox(height: 16),
 
-                        SizedBox(
-                          height: 180,
-                          child: PageView(
-                            controller: _bannerController,
-                            onPageChanged: (index) {
-                              setState(() {
-                                _currentBannerIndex = index;
-                              });
-                            },
-                            children: const [
-                              PromotionBanner(
-                                title: 'UPLOAD PRESCRIPTION',
-                                description:
-                                    'Upload a Prescription and Tell Us what you Need. We do the Rest!',
-                                discount: 'FLAT 25% OFF ON MEDICINES*',
-                                buttonText: 'ORDER NOW',
-                                color: Color(0xFFE6E1FF),
-                                iconData: Icons.medication,
-                              ),
-                              PromotionBanner(
-                                title: 'UPTO 80% OFFER*',
-                                description: 'On Health Products',
-                                discount:
-                                    'Homeopathy, Ayurvedic, Personal Care & More',
-                                buttonText: 'SHOP NOW',
-                                color: Color(0xFFD1E8E6),
-                                showImage: true,
-                              ),
-                              PromotionBanner(
-                                title: 'UPTO 80% OFFER*',
-                                description: 'On Health Products',
-                                discount:
-                                    'Homeopathy, Ayurvedic, Personal Care & More',
-                                buttonText: 'SHOP NOW',
-                                color: Color(0xFFD1E8E6),
-                                showImage: true,
-                              ),
-                              PromotionBanner(
-                                title: 'UPTO 80% OFFER*',
-                                description: 'On Health Products',
-                                discount:
-                                    'Homeopathy, Ayurvedic, Personal Care & More',
-                                buttonText: 'SHOP NOW',
-                                color: Color(0xFFD1E8E6),
-                                showImage: true,
-                              ),
-                            ],
-                          ),
-                        ),
+                        LayoutBuilder(builder: (context, constraints) {
+                          return SizedBox(
+                            height: constraints.maxWidth * 0.5,
+                            child: PageView(
+                              controller: _bannerController,
+                              onPageChanged: (index) {
+                                setState(() {
+                                  _currentBannerIndex = index;
+                                });
+                              },
+                              children: const [
+                                PromotionBanner(
+                                  title: 'UPLOAD PRESCRIPTION',
+                                  description:
+                                      'Upload a Prescription and Tell Us what you Need. We do the Rest!',
+                                  discount: 'FLAT 25% OFF ON MEDICINES*',
+                                  buttonText: 'ORDER NOW',
+                                  color: Color(0xFFE6E1FF),
+                                  iconData: Icons.medication,
+                                ),
+                                PromotionBanner(
+                                  title: 'UPTO 80% OFFER*',
+                                  description: 'On Health Products',
+                                  discount:
+                                      'Homeopathy, Ayurvedic, Personal Care & More',
+                                  buttonText: 'SHOP NOW',
+                                  color: Color(0xFFD1E8E6),
+                                  showImage: true,
+                                ),
+                                PromotionBanner(
+                                  title: 'UPTO 80% OFFER*',
+                                  description: 'On Health Products',
+                                  discount:
+                                      'Homeopathy, Ayurvedic, Personal Care & More',
+                                  buttonText: 'SHOP NOW',
+                                  color: Color(0xFFD1E8E6),
+                                  showImage: true,
+                                ),
+                                PromotionBanner(
+                                  title: 'UPTO 80% OFFER*',
+                                  description: 'On Health Products',
+                                  discount:
+                                      'Homeopathy, Ayurvedic, Personal Care & More',
+                                  buttonText: 'SHOP NOW',
+                                  color: Color(0xFFD1E8E6),
+                                  showImage: true,
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
 
                         const SizedBox(height: 8),
                         Row(
@@ -138,32 +152,60 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             TextButton(
-                                onPressed: () {}, child: const Text('See all')),
+                                onPressed: () =>
+                                    Get.toNamed(AppPages.CONSULTATION),
+                                child: const Text('See all')),
                           ],
                         ),
-                        SizedBox(
-                          height: 180,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: const [
-                              ProductCard(
-                                  name: 'Panadol',
-                                  quantity: '20pcs',
-                                  price: 15.99,
-                                  imageUrl: '/placeholder.svg'),
-                              ProductCard(
-                                  name: 'Bodrex Herbal',
-                                  quantity: '100ml',
-                                  price: 7.99,
-                                  imageUrl: '/placeholder.svg'),
-                              ProductCard(
-                                  name: 'Konidin',
-                                  quantity: '3pcs',
-                                  price: 5.99,
-                                  imageUrl: '/placeholder.svg'),
-                            ],
-                          ),
-                        ),
+
+                        Obx(() {
+                          if (medicineController.isLoading.value) {
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.all(16),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                childAspectRatio: 0.7,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
+                              ),
+                              itemCount: 3,
+                              itemBuilder: (context, index) =>
+                                  const MedicineCardShimmer(),
+                            );
+                          } else if (medicineController.topMedicines.isEmpty) {
+                            return const Center(
+                                child: Text('No medicines found'));
+                          }
+                          return GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.all(16),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 0.7,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                            ),
+                            itemCount: medicineController.topMedicines.length,
+                            itemBuilder: (context, index) {
+                              final medicine =
+                                  medicineController.topMedicines[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  medicineController
+                                      .fetchMedicineDetails(medicine.id);
+                                  Get.toNamed(AppPages.MEDICINE_DETAILS,
+                                      arguments: medicine.id);
+                                },
+                                child: MedicineCard(medicine: medicine),
+                              );
+                            },
+                          );
+                        }),
 
                         const SizedBox(height: 24),
 
@@ -175,26 +217,39 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                             TextButton(
-                                onPressed: () => Get.offAllNamed(AppPages.ARTICLE), child: const Text('See all')),
+                                onPressed: () =>
+                                    Get.offAllNamed(AppPages.ARTICLE),
+                                child: const Text('See all')),
                           ],
                         ),
-                        const ArticleCard(
-                          title: 'Understanding the Dangers of Illegal Drugs',
-                          author: 'Dr. Ibrahimović',
-                          imageUrl: '/placeholder.svg',
-                        ),
-                        const SizedBox(height: 12),
-                        const ArticleCard(
-                          title: 'Boost Your Immunity Naturally',
-                          author: 'Dr. Jhon Summit',
-                          imageUrl: '/placeholder.svg',
-                        ),
-                        const SizedBox(height: 12),
-                        const ArticleCard(
-                          title: 'Understanding Sleep Hygiene',
-                          author: 'Dr. Jandal Jadi',
-                          imageUrl: '/placeholder.svg',
-                        ),
+
+                        Obx(() {
+                          if (articleController.isLoading.value) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: 3, // jumlah shimmer cards saat loading
+                              itemBuilder: (context, index) =>
+                                  const ArticleCardShimmer(),
+                            );
+                          } else if (articleController.topArticles.isEmpty) {
+                            return const Center(
+                                child: Text('No articles found'));
+                          }
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: articleController.topArticles.length,
+                            itemBuilder: (context, index) {
+                              final article =
+                                  articleController.topArticles[index];
+                              return ArticleCard(
+                                  article: article,
+                                  controller: articleController);
+                            },
+                          );
+                        }),
+
                         const SizedBox(height: 80),
                       ],
                     ),

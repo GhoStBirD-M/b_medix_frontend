@@ -5,9 +5,10 @@ import '../services/medicine_service.dart';
 
 class MedicineController extends GetxController {
   final MedicineService _apiService = MedicineService();
-  
+
   // Observable variables
   final RxList<Medicine> allMedicines = <Medicine>[].obs;
+  final RxList<Medicine> topMedicines = <Medicine>[].obs;
   final RxList<Medicine> medicines = <Medicine>[].obs;
   final Rx<Medicine?> selectedMedicine = Rx<Medicine?>(null);
   final RxBool isLoading = false.obs;
@@ -47,10 +48,10 @@ class MedicineController extends GetxController {
     if (query.isEmpty) {
       medicines.value = allMedicines;
     } else {
-    medicines.value = allMedicines
-        .where((medicine) =>
-            medicine.name.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+      medicines.value = allMedicines
+          .where((medicine) =>
+              medicine.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
     }
   }
 
@@ -73,6 +74,21 @@ class MedicineController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> fetchTopMedicines() async {
+    try {
+      final result = await _apiService.getMedicines();
+      topMedicines.value = result.take(3).toList();
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to load top medicines: $e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+import './prescription_screen.dart';
+import './address_screen.dart';
+import './payment_method_screen.dart';
 import '../../routes/app_pages.dart';
 import '../../views/profile/pill_reminder_screen.dart';
 import '../../controllers/auth_controller.dart';
@@ -46,11 +50,7 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.receipt_long_outlined,
                       title: "My Prescription",
                       iconColor: Colors.black,
-                    ),
-                    MenuItem(
-                      icon: Icons.science_outlined,
-                      title: "Your Lab Test",
-                      iconColor: Colors.black,
+                      onTap: () => Get.to(PrescriptionScreen()),
                     ),
                     MenuItem(
                       icon: Icons.medical_services_outlined,
@@ -62,11 +62,13 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.credit_card_outlined,
                       title: "Payment Methods",
                       iconColor: Colors.black,
+                      onTap: () => Get.to(PaymentMethodInfoScreen()),
                     ),
                     MenuItem(
                       icon: Icons.location_on_outlined,
                       title: "Your Addresses",
                       iconColor: Colors.black,
+                      onTap: () => Get.to(AddressScreen()),
                     ),
                     MenuItem(
                       icon: Icons.alarm_outlined,
@@ -78,6 +80,15 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.person_add_outlined,
                       title: "Invites Friends",
                       iconColor: Colors.black,
+                      onTap: () {
+                        SharePlus.instance.share(
+                          ShareParams(
+                            text:
+                                'Yuk coba aplikasi ini! Unduh di: wa.me/6285785233923',
+                            subject: 'Undangan dari Temanmu',
+                          ),
+                        );
+                      },
                     ),
                     MenuItem(
                       icon: Icons.logout_outlined,
@@ -90,8 +101,7 @@ class ProfileScreen extends StatelessWidget {
                             backgroundColor: Colors.white,
                             content: const SizedBox(
                               width: 300,
-                              child: Text(
-                                  "Are you sure you want to Logout?"),
+                              child: Text("Are you sure you want to Logout?"),
                             ),
                             actions: [
                               TextButton(

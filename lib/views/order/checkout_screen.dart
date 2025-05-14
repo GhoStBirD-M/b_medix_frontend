@@ -156,7 +156,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     amount: widget.totalAmount));
                               } else if (selectedPaymentMethod == 'tunai') {
                                 Get.to(SuccessScreen(
-                                    paymentMethod: selectedPaymentMethod!));
+                                  paymentMethod: selectedPaymentMethod!,
+                                  orderId:
+                                      "ORD-${DateTime.now().millisecondsSinceEpoch}",
+                                ));
                               }
                             } catch (e) {
                               Get.snackbar(

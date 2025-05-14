@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../models/doctor_model.dart';
 import '../../routes/app_pages.dart';
 import '../../controllers/chat_controller.dart';
 
@@ -25,6 +26,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Doctor doctor = Get.arguments;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -92,16 +94,16 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                   const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
-                        'Dr. James Patel',
+                        doctor.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
                       ),
                       Text(
-                        'Mental Psychologist',
+                        doctor.specialist,
                         style: TextStyle(color: Colors.grey, fontSize: 14),
                       ),
                     ],

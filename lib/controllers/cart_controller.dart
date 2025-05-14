@@ -19,6 +19,9 @@ class CartController extends GetxController {
   double get deliveryFee => _cart.value?.deliveryFee ?? 0;
   double get total => _cart.value?.total ?? 0;
 
+  var isAddingToCart = false.obs;
+  var isBuyingNow = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -38,15 +41,17 @@ class CartController extends GetxController {
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
-      print(e);
     } finally {
       isLoading.value = false;
     }
   }
 
-  Future<void> addToCart(int medicineId, int quantity) async {
+  Future<void> addToCart(int medicineId, int quantity,
+      {RxBool? loadingFlag}) async {
     try {
-      isUpdating.value = true;
+      // Gunakan loadingFlag jika tersedia, jika tidak pakai isUpdating
+      (loadingFlag ?? isUpdating).value = true;
+
       final success = await _cartService.addToCart(medicineId, quantity);
       if (success) {
         await fetchCart();
@@ -67,7 +72,7 @@ class CartController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
-      isUpdating.value = false;
+      (loadingFlag ?? isUpdating).value = false;
     }
   }
 

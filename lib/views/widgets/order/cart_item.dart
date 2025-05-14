@@ -24,7 +24,7 @@ class CartItemWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
                 image: NetworkImage(item.medicine?.imageUrl ??
-                    'https://b-medix.im-fall.my.id/storage/medicines/default.png'),
+                    'https://b-medix.im-fall.my.id/storage/medicines/paracetamol.png'),
                 fit: BoxFit.cover,
               ),
             ),

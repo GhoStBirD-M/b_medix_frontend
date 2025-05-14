@@ -1,72 +1,111 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+import '../../../routes/app_pages.dart';
+import '../../../controllers/article_controller.dart';
+import '../../../models/article_model.dart';
 
 class ArticleCard extends StatelessWidget {
-  final String title;
-  final String author;
-  final String imageUrl;
+  final ArticleElement article;
+  final ArticleController controller;
 
   const ArticleCard({
     super.key,
-    required this.title,
-    required this.author,
-    required this.imageUrl,
+    required this.article,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        children: [
-          // Article image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: imageUrl == '/placeholder.svg'
-                ? Container(
-                    width: 80,
-                    height: 80,
-                    color: Colors.grey[200],
-                    child: const Icon(Icons.article, size: 40, color: Colors.grey),
-                  )
-                : Image.network(
-                    imageUrl,
-                    width: 80,
-                    height: 80,
+      elevation: 2,
+      child: InkWell(
+        onTap: () {
+          controller.fetchArticleDetail(article.id);
+          Get.toNamed(AppPages.ARTICLE_DETAIL, arguments: article.id);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0x3F000000),
+                blurRadius: 2,
+                offset: Offset(0, 0),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              // Gambar artikel
+              Container(
+                width: 96,
+                height: 63,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    bottomLeft: Radius.circular(12),
+                  ),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      "https://picsum.photos/200?random=${Random().nextInt(1000)}",
+                    ),
                     fit: BoxFit.cover,
                   ),
-          ),
-          const SizedBox(width: 12),
-          
-          // Article details
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  author,
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 14,
-                  ),
+              ),
+              const SizedBox(width: 14),
+              // Detail artikel
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      article.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 11,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'By: ${article.author}',
+                      style: const TextStyle(
+                        color: Color(0xFF5E5E5E),
+                        fontSize: 6,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      DateFormat('dd MMM yyyy').format(article.createdAt),
+                      style: const TextStyle(
+                        color: Color(0xFF5E5E5E),
+                        fontSize: 6,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

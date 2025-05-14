@@ -18,11 +18,26 @@ class CartService {
       },
     );
 
+    final body = json.decode(response.body);
+
     if (response.statusCode == 200) {
-      return Cart.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load cart');
+      return Cart.fromJson(body);
     }
+    
+    if (response.statusCode == 404 &&
+        body is Map<String, dynamic> &&
+        body['message'] == 'Cart is empty') {
+      return Cart(
+        id: 0,
+        userId: 0,
+        isCheckedOut: 0,
+        createdAt: '',
+        updatedAt: '',
+        items: [],
+      );
+    }
+
+    throw Exception('Failed to load cart');
   }
 
   Future<bool> addToCart(int medicineId, int quantity) async {

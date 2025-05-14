@@ -8,6 +8,7 @@ class ArticleController extends GetxController {
 
   final RxBool isLoading = false.obs;
   final RxList<ArticleElement> allArticles = <ArticleElement>[].obs;
+  final RxList<ArticleElement> topArticles = <ArticleElement>[].obs;
   final RxList<ArticleElement> articles = <ArticleElement>[].obs;
   final Rx<ArticleElement?> selectedArticle = Rx<ArticleElement?>(null);
 
@@ -74,6 +75,21 @@ class ArticleController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> fetchTopArticles() async {
+    try {
+      final result = await _apiService.getArticles();
+      topArticles.value = result.article.take(3).toList();
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to load top medicines: $e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }

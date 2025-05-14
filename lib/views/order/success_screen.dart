@@ -6,10 +6,12 @@ import '../../views/widgets/order/primary_button.dart';
 
 class SuccessScreen extends StatelessWidget {
   final String paymentMethod;
+  final String orderId;
 
   const SuccessScreen({
     super.key,
     required this.paymentMethod,
+    required this.orderId,
   });
 
   @override
@@ -62,7 +64,7 @@ class SuccessScreen extends StatelessWidget {
               const SizedBox(height: 48),
               InfoContainer(
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -73,7 +75,7 @@ class SuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '#ORD-12345',
+                        orderId,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

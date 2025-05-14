@@ -1,0 +1,2 @@
+C:/Users/Administrator/Documents/Projek/flutter/b_medix_frontend_imad/android/app/.cxx/Debug/v2h4e2a5/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/Documents/Projek/flutter/b_medix_frontend_imad/android/app/.cxx/Debug/v2h4e2a5/x86_64/CMakeFiles/rebuild_cache.dir

@@ -49,13 +49,6 @@ class MedicineDetailScreen extends StatelessWidget {
                       child: Image.network(
                         medicine.imageUrl,
                         fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[200],
-                            child: const Icon(Icons.image_not_supported,
-                                size: 100),
-                          );
-                        },
                       ),
                     ),
 
@@ -180,12 +173,16 @@ class MedicineDetailScreen extends StatelessWidget {
               Expanded(
                 child: Obx(() {
                   return OutlinedButton(
-                    onPressed: cartController.isUpdating.value
+                    onPressed: cartController.isAddingToCart.value
                         ? null
                         : () {
                             final medicine = controller.selectedMedicine.value;
                             if (medicine != null) {
-                              cartController.addToCart(medicine.id, 1);
+                              cartController.addToCart(
+                                medicine.id,
+                                1,
+                                loadingFlag: cartController.isAddingToCart,
+                              );
                             }
                           },
                     style: OutlinedButton.styleFrom(
@@ -195,11 +192,12 @@ class MedicineDetailScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: cartController.isUpdating.value
+                    child: cartController.isAddingToCart.value
                         ? const SizedBox(
                             height: 20,
                             width: 20,
-                            child: CircularProgressIndicator())
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
                         : const Text(
                             'Add To Cart',
                             style: TextStyle(
@@ -212,31 +210,47 @@ class MedicineDetailScreen extends StatelessWidget {
               ),
               const SizedBox(width: 15),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: cartController.isUpdating.value
-                      ? null
-                      : () async {
-                          final medicine = controller.selectedMedicine.value;
-                          if (medicine != null) {
-                            await cartController.addToCart(medicine.id, 1);
-                            Get.toNamed(AppPages.CART);
-                          }
-                        },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
-                    backgroundColor: Color(0xFF0BAB7C),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                child: Obx(() {
+                  return ElevatedButton(
+                    onPressed: cartController.isBuyingNow.value
+                        ? null
+                        : () async {
+                            final medicine = controller.selectedMedicine.value;
+                            if (medicine != null) {
+                              await cartController.addToCart(
+                                medicine.id,
+                                1,
+                                loadingFlag: cartController.isBuyingNow,
+                              );
+                              Get.toNamed(AppPages.CART);
+                            }
+                          },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 30),
+                      backgroundColor: Color(0xFF0BAB7C),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Buy Now',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                    child: cartController.isBuyingNow.value
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : const Text(
+                            'Buy Now',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                  );
+                }),
               ),
             ],
           ),

@@ -110,7 +110,7 @@ class _QrisPaymentScreenState extends State<QrisPaymentScreen> {
                       ],
                     ),
                     child: Image.asset(
-                      'images/qris.jpg',
+                      'assets/images/qris.jpg',
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -167,7 +167,7 @@ class _QrisPaymentScreenState extends State<QrisPaymentScreen> {
                   ),
                 );
                 Future.delayed(const Duration(seconds: 2), () {
-                  Get.to(SuccessScreen(paymentMethod: paymentMethod));
+                  Get.to(SuccessScreen(paymentMethod: paymentMethod, orderId: "MEDORD-${DateTime.now().millisecondsSinceEpoch}"));
                 });
               },
             ),

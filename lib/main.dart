@@ -1,28 +1,36 @@
 import 'package:device_preview/device_preview.dart';
+// import 'package:flutter/foundation.dart';
+// import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:intl/date_symbol_data_local.dart';
 import '../controllers/home_controller.dart';
 import '../routes/app_pages.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDateFormatting('id', null);
+
   await GetStorage.init();
   Get.put(HomeController());
 
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Jakarta'));
 
-  runApp(
-    DevicePreview(
-      defaultDevice: Devices.ios.iPhone13ProMax,
-      builder: (context) => MyApp(),
-    ),
-  );
+  runApp(DevicePreview(
+    defaultDevice: Devices.ios.iPhone13ProMax,
+    enabled: true,
+    builder: (context) => MyApp(),
+  ));
+
+  // runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

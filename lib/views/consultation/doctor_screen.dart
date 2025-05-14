@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../views/widgets/doctor/doctor_card_shimmer.dart';
 import '../../routes/app_pages.dart';
 import '../../controllers/doctor_controller.dart';
 import '../../views/widgets/common/consult_tab_bar.dart';
@@ -62,26 +63,30 @@ class _DoctorScreenState extends State<DoctorScreen>
                   ),
                 ),
                 IconButton(
-                    onPressed: () => Get.toNamed(AppPages.CART), icon: const Icon(Icons.shopping_cart_outlined)),
+                    onPressed: () => Get.toNamed(AppPages.CART),
+                    icon: const Icon(Icons.shopping_cart_outlined)),
                 const SizedBox(width: 16),
               ],
             ),
           ),
-
           ConsultationTabBar(tabController: _tabController),
-
           Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
                 Column(
                   children: [
-                    CustomSearchBar(hintText: 'Search for doctors', onChanged: controller.setSearchQuery),
+                    CustomSearchBar(
+                        hintText: 'Search for doctors',
+                        onChanged: controller.setSearchQuery),
                     Expanded(
                       child: Obx(() {
                         if (controller.isLoading.value) {
-                          return const Center(
-                              child: CircularProgressIndicator());
+                          return ListView.builder(
+                            itemCount: 5,
+                            itemBuilder: (context, index) =>
+                                const DoctorCardShimmer(),
+                          );
                         } else if (controller.doctors.isEmpty) {
                           return const Center(child: Text('No doctors found'));
                         }
@@ -95,8 +100,8 @@ class _DoctorScreenState extends State<DoctorScreen>
                               specialist: doctor.specialist,
                               openTime: "08:00",
                               closeTime: "17:00",
-                              onPressed: () =>
-                                  Get.toNamed('/chat/${doctor.id}'),
+                              onPressed: () => Get.toNamed('/chat/${doctor.id}',
+                                  arguments: doctor),
                             );
                           },
                         );
