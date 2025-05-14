@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../models/chat_model.dart';
+import '../services/chat_service.dart';
+
+class ChatController extends GetxController {
+  final ChatService _apiService = Get.find<ChatService>();
+  final ScrollController scrollController = ScrollController();
+
+  final RxBool isLoading = false.obs;
+  final RxList<Chat> messages = <Chat>[].obs;
+  final RxInt doctorId = 0.obs;
+  final RxBool isSending = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    /// Auto scroll setiap kali messages berubah
+    ever(messages, (_) {
+      scrollToBottom();
+    });
+  }
+
+  void scrollToBottom() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      if (scrollController.hasClients) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
+
+  void setDoctorId(int id) {
+    doctorId.value = id;
+    fetchChatHistory();
+  }
+
+  Future<void> fetchChatHistory() async {
+    try {
+      isLoading.value = true;
+      final List<Chat> chatHistory =
+          await _apiService.getChatHistory(doctorId.value);
+      messages.value = chatHistory;
+    } catch (e) {
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> sendMessage(String message) async {
+    if (message.trim().isEmpty) return;
+    if (doctorId.value == 0) {
+      Get.snackbar('Error', 'Target doctor is not set',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+      return;
+    }
+
+    try {
+      isSending.value = true;
+      final Chat newMessage =
+          await _apiService.sendMessage(doctorId.value, message);
+      messages.add(newMessage);
+
+      // Simulate doctor's response after a short delay
+      // await Future.delayed(const Duration(seconds: 1));
+      fetchChatHistory();
+    } catch (e) {
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+      print(e);
+    } finally {
+      isSending.value = false;
+    }
+  }
+}
