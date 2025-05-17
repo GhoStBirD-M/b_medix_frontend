@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                                     title: 'BACA ARTIKEL KESEHATAN',
                                     description:
                                         'Baca tips sehat, info penyakit, dan gaya hidup sehat.',
-                                    discount: 'ARTIKEL DIPERBARUI TIAP MINGGU',
+                                    discount: 'ARTIKEL BARU TIAP MINGGU',
                                     buttonText: 'BACA ARTIKEL',
                                     color: const Color(0xFFFFF3E0),
                                     imageAssetPath:
@@ -111,11 +111,11 @@ class _HomePageState extends State<HomePage> {
                                           PrescriptionScreen(),
                                         )),
                                 PromotionBanner(
-                                    title: 'KONSULTASI DOKTER ONLINE',
+                                    title: 'KONSULTASI DOKTER',
                                     description:
                                         'Butuh saran medis cepat? Konsultasi langsung dari rumah.',
                                     discount: 'GRATIS UNTUK PENGGUNA BARU',
-                                    buttonText: 'KONSULTASI SEKARANG',
+                                    buttonText: 'CHAT SEKARANG',
                                     color: const Color(0xFFF3E5F5),
                                     imageAssetPath:
                                         'assets/images/doctor_consult.png',
