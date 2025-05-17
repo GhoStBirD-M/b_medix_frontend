@@ -2,8 +2,7 @@ import '../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/auth_controller.dart';
-import '../widgets/auth/custom_button.dart';
-import '../widgets/auth/custom_text_field.dart';
+import '../widgets/auth/auth_widgets.dart';
 
 class RegisterScreen extends StatelessWidget {
   final AuthController controller = Get.find<AuthController>();

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../widgets/medicine/medicine_cards_shimmer.dart';
 import '../../routes/app_pages.dart';
-import '../../views/widgets/common/search_bar.dart';
+import '../widgets/common/search_bar.dart';
+import '../widgets/medicine/medicine_widgets.dart';
 import '../../controllers/medicine_controller.dart';
-import '../../views/widgets/medicine/medicine_cards.dart';
 
 class MedicineTab extends StatelessWidget {
   MedicineTab({super.key});

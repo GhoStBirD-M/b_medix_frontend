@@ -2,17 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../routes/app_pages.dart';
 import '../../views/profile/prescription_screen.dart';
-import '../../views/widgets/article/article_card.dart';
-import '../../views/widgets/article/article_card_shimmer.dart';
-import '../../views/widgets/medicine/medicine_cards_shimmer.dart';
-import '../../views/widgets/medicine/medicine_cards.dart';
-import '../../controllers/article_controller.dart';
-import '../../controllers/medicine_controller.dart';
-import '../../controllers/auth_controller.dart';
-import '../../controllers/home_controller.dart';
-import '../widgets/common/bottom_navigation.dart';
-import '../widgets/common/header.dart';
-import '../widgets/common/promotion_banner.dart';
+import '../widgets/article/article_widgets.dart';
+import '../widgets/medicine/medicine_widgets.dart';
+import '../../controllers/home_barrel.dart';
+import '../widgets/common/common_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -88,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                                     buttonText: 'BELI SEKARANG',
                                     color: const Color(0xFFD7D0FF),
                                     imageAssetPath:
-                                        'images/medicine_promo.png',
+                                        'assets/images/medicine_promo.png',
                                     onPressed: () => Get.toNamed(
                                           AppPages.CONSULTATION,
                                           arguments: 1,
@@ -101,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                                     buttonText: 'BACA ARTIKEL',
                                     color: const Color(0xFFFFF3E0),
                                     imageAssetPath:
-                                        'images/health_articles.png',
+                                        'assets/images/health_articles.png',
                                     onPressed: () => Get.toNamed(
                                           AppPages.ARTICLE,
                                         )),
@@ -113,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                     buttonText: 'UNGGAH RESEP',
                                     color: const Color(0xFFE8F5E9),
                                     imageAssetPath:
-                                        'images/upload_prescription.png',
+                                        'assets/images/upload_prescription.png',
                                     onPressed: () => Get.to(
                                           PrescriptionScreen(),
                                         )),
@@ -125,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                     buttonText: 'KONSULTASI SEKARANG',
                                     color: const Color(0xFFF3E5F5),
                                     imageAssetPath:
-                                        'images/doctor_consult.png',
+                                        'assets/images/doctor_consult.png',
                                     onPressed: () => Get.toNamed(
                                           AppPages.CONSULTATION,
                                         )),

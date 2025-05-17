@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/auth_controller.dart';
 import '../../routes/app_pages.dart';
-import '../widgets/auth/auth_divider.dart';
-import '../widgets/auth/auth_header.dart';
-import '../widgets/auth/custom_button.dart';
-import '../widgets/auth/custom_text_field.dart';
-import '../widgets/auth/google_sign_in_button.dart';
+import '../widgets/auth/auth_widgets.dart';
 // import '../home/home_page.dart';
 
 class LoginScreen extends StatelessWidget {

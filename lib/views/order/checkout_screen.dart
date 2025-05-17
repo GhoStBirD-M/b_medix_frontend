@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/cart_controller.dart';
-import '../../views/widgets/order/custom_app_bar.dart';
-import '../../views/widgets/order/info_container.dart';
-import '../../views/widgets/order/payment_method_item.dart';
-import '../../views/widgets/order/primary_button.dart';
+import '../../views/widgets/order/order_widgets.dart';
 import 'qris_payment_screen.dart';
 import 'success_screen.dart';
 

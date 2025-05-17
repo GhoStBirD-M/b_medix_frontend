@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../views/widgets/order/cart_item.dart';
-import '../../views/widgets/order/cart_summary.dart';
+import '../widgets/order/empty_state.dart';
+import '../widgets/order/cart_item.dart';
+import '../widgets/order/cart_summary.dart';
 import '../../controllers/cart_controller.dart';
 
 class CartScreen extends StatelessWidget {
@@ -45,8 +46,7 @@ class CartScreen extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (cartController.items.isEmpty) {
-          return const Center(child: Text('Your cart is empty'));
-        }
+          return const EmptyStateWidget();        }
 
         return Column(
           children: [

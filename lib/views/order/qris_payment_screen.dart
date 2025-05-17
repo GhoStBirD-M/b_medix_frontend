@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../views/widgets/order/custom_app_bar.dart';
-import '../../views/widgets/order/info_container.dart';
-import '../../views/widgets/order/primary_button.dart';
+import '../../views/widgets/order/order_widgets.dart';
 import 'success_screen.dart';
 
 class QrisPaymentScreen extends StatefulWidget {

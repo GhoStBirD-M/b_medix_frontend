@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../views/widgets/article/article_card_shimmer.dart';
-// import 'package:intl/intl.dart';
-import '../widgets/article/article_card.dart';
+import '../widgets/article/article_widgets.dart';
 import '../../views/widgets/common/search_bar.dart';
 import '../../controllers/article_controller.dart';
-// import '../../routes/app_pages.dart';
 import '../widgets/common/bottom_navigation.dart';
-// import 'dart:math';
 
 class ArticleScreen extends StatelessWidget {
   final ArticleController controller = Get.put(ArticleController());
