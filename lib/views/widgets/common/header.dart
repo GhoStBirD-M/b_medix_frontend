@@ -5,13 +5,13 @@ import '../../../routes/app_pages.dart';
 class Header extends StatelessWidget {
   final String greeting;
   final String name;
-  final String avatarUrl;
+  final String profilePic;
 
   const Header({
     super.key,
     required this.greeting,
     required this.name,
-    required this.avatarUrl,
+    required this.profilePic,
   });
 
   @override
@@ -24,9 +24,9 @@ class Header extends StatelessWidget {
           // Avatar
           CircleAvatar(
             radius: 24,
-            backgroundImage: NetworkImage(avatarUrl),
+            backgroundImage: AssetImage(profilePic),
             backgroundColor: Colors.white,
-            child: avatarUrl == '/placeholder.svg'
+            child: profilePic == '/placeholder.svg'
                 ? const Icon(Icons.person, size: 30, color: Colors.grey)
                 : null,
           ),

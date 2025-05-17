@@ -30,7 +30,7 @@ class EmptyStateWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Tambahkan pengingat obat untuk memulai',
+            'Tambahkan Resep',
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey[600],
@@ -41,7 +41,7 @@ class EmptyStateWidget extends StatelessWidget {
             onPressed: () => controller.showAddPrescriptionSheet(),
             icon: const Icon(Icons.add, color: Colors.teal),
             label: const Text(
-              'Tambah Pengingat',
+              'Tambah Resep',
               style: TextStyle(color: Colors.teal),
             ),
             style: OutlinedButton.styleFrom(

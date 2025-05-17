@@ -6,8 +6,8 @@ class PromotionBanner extends StatelessWidget {
   final String discount;
   final String buttonText;
   final Color color;
-  final IconData? iconData;
-  final bool showImage;
+  final String imageAssetPath;
+  final VoidCallback onPressed;
 
   const PromotionBanner({
     super.key,
@@ -16,22 +16,22 @@ class PromotionBanner extends StatelessWidget {
     required this.discount,
     required this.buttonText,
     required this.color,
-    this.iconData,
-    this.showImage = false,
+    required this.imageAssetPath,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         children: [
-          // Left side content
+          // Left: Text content
           Expanded(
             flex: 3,
             child: Column(
@@ -47,100 +47,46 @@ class PromotionBanner extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   description,
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
+                  style: const TextStyle(fontSize: 14),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 Text(
                   discount,
                   style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.teal,
                   ),
                 ),
-                const Spacer(),
-                if (!showImage)
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00BF8E),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: Text(buttonText),
-                  ),
-                if (showImage)
-                  SizedBox(
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00BF8E),
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text(buttonText),
+                const SizedBox(height: 12),
+                ElevatedButton(
+                  onPressed: onPressed,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
+                  child: Text(buttonText),
+                ),
               ],
             ),
           ),
-          
-          // Right side content (icon or image)
+
+          const SizedBox(width: 10),
+
+          // Right: Image
           Expanded(
             flex: 2,
-            child: showImage
-                ? Image.network(
-                    '/placeholder.svg',
-                    height: 120,
-                  )
-                : Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: const BoxDecoration(
-                          color: Colors.blue,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.medication,
-                        size: 60,
-                        color: Colors.white,
-                      ),
-                      Positioned(
-                        top: 10,
-                        right: 20,
-                        child: Container(
-                          width: 20,
-                          height: 20,
-                          decoration: const BoxDecoration(
-                            color: Colors.cyan,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 30,
-                        right: 10,
-                        child: Container(
-                          width: 15,
-                          height: 15,
-                          decoration: const BoxDecoration(
-                            color: Colors.teal,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                imageAssetPath,
+                height: 100,
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
         ],
       ),

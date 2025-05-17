@@ -72,8 +72,8 @@ class ProfileHeader extends StatelessWidget {
                     ),
                     child: const CircleAvatar(
                       radius: 40,
-                      backgroundImage: NetworkImage(
-                        'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Profile-UIovAMahBV0DmevpLI6qb4FKc6pziE.png', // Using a placeholder since we can't extract the actual image
+                      backgroundImage: AssetImage(
+                        'assets/images/profile.jpg', // Using a placeholder since we can't extract the actual image
                       ),
                     ),
                   ),
@@ -106,21 +106,6 @@ class ProfileHeader extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 1,
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                      size: 20,
                     ),
                   ),
                 ],

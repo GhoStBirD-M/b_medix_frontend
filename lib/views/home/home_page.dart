@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/article_controller.dart';
+import '../../routes/app_pages.dart';
+import '../../views/profile/prescription_screen.dart';
 import '../../views/widgets/article/article_card.dart';
 import '../../views/widgets/article/article_card_shimmer.dart';
 import '../../views/widgets/medicine/medicine_cards_shimmer.dart';
 import '../../views/widgets/medicine/medicine_cards.dart';
+import '../../controllers/article_controller.dart';
 import '../../controllers/medicine_controller.dart';
-import '../../routes/app_pages.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/home_controller.dart';
 import '../widgets/common/bottom_navigation.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               Header(
                 greeting: 'How was Ur Health?',
                 name: user.name,
-                avatarUrl: '/placeholder.svg',
+                profilePic: 'assets/images/profile.jpg',
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -68,7 +69,6 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 16),
-
                         LayoutBuilder(builder: (context, constraints) {
                           return SizedBox(
                             height: constraints.maxWidth * 0.5,
@@ -79,43 +79,56 @@ class _HomePageState extends State<HomePage> {
                                   _currentBannerIndex = index;
                                 });
                               },
-                              children: const [
+                              children: [
                                 PromotionBanner(
-                                  title: 'UPLOAD PRESCRIPTION',
-                                  description:
-                                      'Upload a Prescription and Tell Us what you Need. We do the Rest!',
-                                  discount: 'FLAT 25% OFF ON MEDICINES*',
-                                  buttonText: 'ORDER NOW',
-                                  color: Color(0xFFE6E1FF),
-                                  iconData: Icons.medication,
-                                ),
+                                    title: 'DISKON OBAT HARI INI!',
+                                    description:
+                                        'Beli obat dengan harga spesial dan diskon hingga 30%.',
+                                    discount: 'HEMAT HINGGA 30%*',
+                                    buttonText: 'BELI SEKARANG',
+                                    color: const Color(0xFFD7D0FF),
+                                    imageAssetPath:
+                                        'images/medicine_promo.png',
+                                    onPressed: () => Get.toNamed(
+                                          AppPages.CONSULTATION,
+                                          arguments: 1,
+                                        )),
                                 PromotionBanner(
-                                  title: 'UPTO 80% OFFER*',
-                                  description: 'On Health Products',
-                                  discount:
-                                      'Homeopathy, Ayurvedic, Personal Care & More',
-                                  buttonText: 'SHOP NOW',
-                                  color: Color(0xFFD1E8E6),
-                                  showImage: true,
-                                ),
+                                    title: 'BACA ARTIKEL KESEHATAN',
+                                    description:
+                                        'Baca tips sehat, info penyakit, dan gaya hidup sehat.',
+                                    discount: 'ARTIKEL DIPERBARUI TIAP MINGGU',
+                                    buttonText: 'BACA ARTIKEL',
+                                    color: const Color(0xFFFFF3E0),
+                                    imageAssetPath:
+                                        'images/health_articles.png',
+                                    onPressed: () => Get.toNamed(
+                                          AppPages.ARTICLE,
+                                        )),
                                 PromotionBanner(
-                                  title: 'UPTO 80% OFFER*',
-                                  description: 'On Health Products',
-                                  discount:
-                                      'Homeopathy, Ayurvedic, Personal Care & More',
-                                  buttonText: 'SHOP NOW',
-                                  color: Color(0xFFD1E8E6),
-                                  showImage: true,
-                                ),
+                                    title: 'PUNYA RESEP DOKTER?',
+                                    description:
+                                        'Unggah resep dari dokter untuk pengingat obat.',
+                                    discount: 'MUDAH, CEPAT, DAN AMAN',
+                                    buttonText: 'UNGGAH RESEP',
+                                    color: const Color(0xFFE8F5E9),
+                                    imageAssetPath:
+                                        'images/upload_prescription.png',
+                                    onPressed: () => Get.to(
+                                          PrescriptionScreen(),
+                                        )),
                                 PromotionBanner(
-                                  title: 'UPTO 80% OFFER*',
-                                  description: 'On Health Products',
-                                  discount:
-                                      'Homeopathy, Ayurvedic, Personal Care & More',
-                                  buttonText: 'SHOP NOW',
-                                  color: Color(0xFFD1E8E6),
-                                  showImage: true,
-                                ),
+                                    title: 'KONSULTASI DOKTER ONLINE',
+                                    description:
+                                        'Butuh saran medis cepat? Konsultasi langsung dari rumah.',
+                                    discount: 'GRATIS UNTUK PENGGUNA BARU',
+                                    buttonText: 'KONSULTASI SEKARANG',
+                                    color: const Color(0xFFF3E5F5),
+                                    imageAssetPath:
+                                        'images/doctor_consult.png',
+                                    onPressed: () => Get.toNamed(
+                                          AppPages.CONSULTATION,
+                                        )),
                               ],
                             ),
                           );
@@ -153,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             TextButton(
                                 onPressed: () =>
-                                    Get.toNamed(AppPages.CONSULTATION),
+                                    Get.toNamed(AppPages.CONSULTATION, arguments: 1),
                                 child: const Text('See all')),
                           ],
                         ),

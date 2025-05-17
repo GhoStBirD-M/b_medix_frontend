@@ -1,27 +1,16 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import '../views/order/orders_screen.dart';
-import '../../bindings/cart_binding.dart';
-import '../../bindings/medicine_binding.dart';
 import '../../routes/login_redirect_middleware.dart';
-import '../../views/consultation/medicine_details.dart';
+import '../bindings/bindings.dart';
+import '../views/article/articles.dart';
+import '../views/auth/auth.dart';
+import '../views/consultation/consultations.dart';
+import '../views/order/orders_screen.dart';
 import '../views/order/cart_sreen.dart';
-import '../bindings/chat_binding.dart';
-import '../bindings/doctor_binding.dart';
-import '../views/consultation/doctor_chat_screen.dart';
-import '../bindings/profile_binding.dart';
 import '../routes/auth_middleware.dart';
-import '../views/consultation/doctor_screen.dart';
-import '../views/home/splash_screen.dart';
 import '../views/profile/profile_screen.dart';
-import '../bindings/article_binding.dart';
-import '../views/article/article_detail_screen.dart';
-import '../views/article/article_screen.dart';
-import '../bindings/auth_binding.dart';
-import '../bindings/home_binding.dart';
-import '../views/auth/login_screen.dart';
-import '../views/auth/register_screen.dart';
+import '../views/home/splash_screen.dart';
 import '../views/home/home_page.dart';
 
 class AppPages {

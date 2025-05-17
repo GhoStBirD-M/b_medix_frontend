@@ -24,7 +24,9 @@ class _DoctorScreenState extends State<DoctorScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    int initialTabIndex = Get.arguments ?? 0;
+    _tabController =
+        TabController(length: 2, vsync: this, initialIndex: initialTabIndex);
   }
 
   @override

@@ -33,7 +33,6 @@ class PillReminderScreen extends StatelessWidget {
           if (controller.isLoading.value) {
             return const Center(child: CircularProgressIndicator());
           }
-
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(

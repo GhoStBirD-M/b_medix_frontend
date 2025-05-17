@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tes_main/routes/app_pages.dart';
+import '../../routes/app_pages.dart';
+import '../../views/widgets/medicine/medicine_detail_shimmer.dart';
 import '../../controllers/cart_controller.dart';
 import '../../controllers/medicine_controller.dart';
 
@@ -31,7 +32,7 @@ class MedicineDetailScreen extends StatelessWidget {
         final medicine = controller.selectedMedicine.value;
 
         if (medicine == null) {
-          return const Center(child: CircularProgressIndicator());
+          return MedicineDetailShimmer();
         }
 
         return Column(
