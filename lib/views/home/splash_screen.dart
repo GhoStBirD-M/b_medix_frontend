@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF00BF8E),
+      backgroundColor: Colors.teal,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,11 +48,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Icon(
-                Icons.health_and_safety_sharp,
-                size: 80,
-                color: Color(0xFF00BF8E),
-              ),
+              child: Image.asset(
+                'assets/icon/logo.png',
+                fit: BoxFit.cover,
+              )
             ),
             const SizedBox(height: 24),
             // App name
@@ -67,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 8),
             // Tagline
             const Text(
-              'Your Personal Health Assistant',
+              'Personal Health Assistant',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.white,

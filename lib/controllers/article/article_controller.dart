@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../services/article_service.dart';
-import '../models/article_model.dart';
+import '../../services/article_service.dart';
+import '../../models/article/article_model.dart';
 
 class ArticleController extends GetxController {
   final ArticleService _apiService = ArticleService();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../models/address_model.dart';
+import '../../models/profile/address_model.dart';
 import 'package:uuid/uuid.dart';
 
 class AddressController extends GetxController {

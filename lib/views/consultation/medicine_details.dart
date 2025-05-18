@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../routes/app_pages.dart';
 import '../../views/widgets/medicine/medicine_detail_shimmer.dart';
-import '../../controllers/cart_controller.dart';
-import '../../controllers/medicine_controller.dart';
+import '../../controllers/medicine/cart_controller.dart';
+import '../../controllers/medicine/medicine_controller.dart';
 
 class MedicineDetailScreen extends StatelessWidget {
-  final MedicineController controller = Get.find<MedicineController>();
-  final CartController cartController = Get.find<CartController>();
+  final controller = Get.find<MedicineController>();
+  final cartController = Get.find<CartController>();
 
   MedicineDetailScreen({super.key});
 

@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import '../../routes/app_pages.dart';
 import '../widgets/common/search_bar.dart';
 import '../widgets/medicine/medicine_widgets.dart';
-import '../../controllers/medicine_controller.dart';
+import '../../controllers/medicine/medicine_controller.dart';
 
 class MedicineTab extends StatelessWidget {
   MedicineTab({super.key});
 
-  final MedicineController medicineController = Get.put(MedicineController());
+  final MedicineController controller = Get.put(MedicineController());
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class MedicineTab extends StatelessWidget {
       children: [
         CustomSearchBar(
           hintText: 'Search Medicine',
-          onChanged: medicineController.setSearchQuery,
+          onChanged: controller.setSearchQuery,
         ),
         Expanded(
           child: Obx(() {
-            if (medicineController.isLoading.value) {
+            if (controller.isLoading.value) {
               return GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -34,7 +34,7 @@ class MedicineTab extends StatelessWidget {
                 itemCount: 3,
                 itemBuilder: (context, index) => const MedicineCardShimmer(),
               );
-            } else if (medicineController.medicines.isEmpty) {
+            } else if (controller.medicines.isEmpty) {
               return const Center(child: Text('No medicines found'));
             }
             return GridView.builder(
@@ -45,12 +45,12 @@ class MedicineTab extends StatelessWidget {
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
               ),
-              itemCount: medicineController.medicines.length,
+              itemCount: controller.medicines.length,
               itemBuilder: (context, index) {
-                final medicine = medicineController.medicines[index];
+                final medicine = controller.medicines[index];
                 return GestureDetector(
                     onTap: () {
-                      medicineController.fetchMedicineDetails(medicine.id);
+                      controller.fetchMedicineDetails(medicine.id);
                       Get.toNamed(AppPages.MEDICINE_DETAILS,
                           arguments: medicine.id);
                     },

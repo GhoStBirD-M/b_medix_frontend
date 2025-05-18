@@ -38,7 +38,7 @@ class BottomNavigation extends StatelessWidget {
               ),
               _buildNavItem(
                 context,
-                icon: Icons.health_and_safety,
+                icon: Icons.medical_services,
                 label: 'Consultation',
                 isSelected: currentIndex == 1,
                 index: 1,

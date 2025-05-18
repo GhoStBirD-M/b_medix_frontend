@@ -6,7 +6,7 @@ import './address_screen.dart';
 import './payment_method_screen.dart';
 import '../../routes/app_pages.dart';
 import '../../views/profile/pill_reminder_screen.dart';
-import '../../controllers/auth_controller.dart';
+import '../../controllers/auth/auth_controller.dart';
 import '../widgets/profile/profile_header.dart';
 import '../widgets/profile/menu_item.dart';
 import '../widgets/common/bottom_navigation.dart';

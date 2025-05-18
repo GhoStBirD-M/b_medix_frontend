@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../routes/app_pages.dart';
-import '../../../controllers/article_controller.dart';
-import '../../../models/article_model.dart';
+import '../../../controllers/article/article_controller.dart';
+import '../../../models/article/article_model.dart';
 
 class ArticleCard extends StatelessWidget {
   final ArticleElement article;

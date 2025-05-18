@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import '../widgets/order/empty_state.dart';
 import '../widgets/order/cart_item.dart';
 import '../widgets/order/cart_summary.dart';
-import '../../controllers/cart_controller.dart';
+import '../../controllers/medicine/cart_controller.dart';
 
 class CartScreen extends StatelessWidget {
-  final CartController cartController = Get.put(CartController());
+  final cartController = Get.find<CartController>();
 
   CartScreen({super.key});
 

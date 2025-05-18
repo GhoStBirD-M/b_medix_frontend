@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import '../../models/orders_model.dart';
+import '../models/medicine/orders_model.dart';
 import '../utils/constants.dart';
-import '../models/cart_model.dart';
+import '../models/medicine/cart_model.dart';
 
 class CartService {
   final box = GetStorage();

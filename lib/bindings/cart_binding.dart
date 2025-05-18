@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../controllers/cart_controller.dart';
+import '../controllers/medicine/cart_controller.dart';
 
 class CartBinding extends Bindings {
   @override

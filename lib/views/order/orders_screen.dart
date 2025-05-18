@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../views/widgets/order/order_card.dart';
-import '../../controllers/order_controller.dart';
+import '../../controllers/medicine/order_controller.dart';
 
 class OrdersScreen extends StatelessWidget {
-  final OrderController controller = Get.put(OrderController());
+  final controller = Get.find<OrderController>();
 
   OrdersScreen({super.key});
 

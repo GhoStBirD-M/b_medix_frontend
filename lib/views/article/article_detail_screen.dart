@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/article_controller.dart';
+import '../../controllers/article/article_controller.dart';
 import 'package:intl/intl.dart';
 
 class ArticleDetailScreen extends StatelessWidget {
-  final ArticleController controller = Get.find<ArticleController>();
+  final controller = Get.find<ArticleController>();
 
   ArticleDetailScreen({super.key});
 

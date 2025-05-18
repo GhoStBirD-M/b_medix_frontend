@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/prescription_controller.dart';
+import '../../controllers/profile/prescription_controller.dart';
 import '../widgets/prescription/empty_state_widget.dart';
 import '../widgets/prescription/prescription_item_widget.dart';
 

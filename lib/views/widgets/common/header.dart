@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tes_main/views/home/notif_screen.dart';
 import '../../../routes/app_pages.dart';
 
 class Header extends StatelessWidget {
@@ -58,7 +59,7 @@ class Header extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () => Get.to(NotificationScreen()),
           ),
           
           IconButton(

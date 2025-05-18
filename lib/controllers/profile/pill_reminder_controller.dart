@@ -1,13 +1,15 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:tes_main/main.dart';
+import '../home/notification_controller.dart';
+import '../../main.dart';
 import 'package:timezone/timezone.dart' as tz;
-import '../models/pill_reminder_model.dart';
-import '../services/pill_reminder_service.dart';
+import '../../models/profile/pill_reminder_model.dart';
+import '../../services/pill_reminder_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PillReminderController extends GetxController {
   final PillService _pillService = PillService();
+  final notifController = Get.find<NotificationController>();
 
   var reminders = <PillReminder>[].obs;
   var isLoading = false.obs;
@@ -41,8 +43,12 @@ class PillReminderController extends GetxController {
         scheduledTime: reminder.scheduledDateTime(),
       );
       await loadReminders();
+      notifController.addNotification(
+        'Pengingat',
+        'Pengingat minum obat berhasil ditambahkan',
+        Icons.notifications_active_outlined,
+      );
     } catch (e) {
-      print(e);
       Get.snackbar('Error', 'Gagal menambahkan pengingat: $e');
     }
   }

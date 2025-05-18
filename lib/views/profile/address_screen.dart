@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../views/widgets/address/add_address_screen.dart';
-import '../../controllers/address_controller.dart';
+import '../../controllers/profile/address_controller.dart';
 import '../widgets/address/address_card.dart';
 
 class AddressScreen extends StatelessWidget {

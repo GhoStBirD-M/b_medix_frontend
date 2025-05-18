@@ -8,8 +8,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/date_symbol_data_local.dart';
-import '../controllers/home_controller.dart';
+// import '../controllers/home_controller.dart';
 import '../routes/app_pages.dart';
+import 'controllers/home/notification_controller.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -19,8 +20,8 @@ void main() async {
   await initializeDateFormatting('id', null);
 
   await GetStorage.init();
-  Get.put(HomeController());
-
+  Get.put(NotificationController());
+  
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Jakarta'));
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/orders_model.dart';
-import '../services/order_service.dart';
+import '../../models/medicine/orders_model.dart';
+import '../../services/order_service.dart';
 
 class OrderController extends GetxController {
   final OrderService _orderService = OrderService();
@@ -24,7 +24,6 @@ class OrderController extends GetxController {
       final fetchedOrders = await _orderService.getOrders();
       orders.value = fetchedOrders;
     } catch (e) {
-      print(e);
       Get.snackbar('Error', 'Failed to fetch orders: $e',
           backgroundColor: Colors.red,
           colorText: Colors.white,

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import '../../views/widgets/doctor/doctor_card_shimmer.dart';
 import '../../routes/app_pages.dart';
-import '../../controllers/doctor_controller.dart';
+import '../../controllers/doctor/doctor_controller.dart';
 import '../../views/widgets/common/consult_tab_bar.dart';
 import '../../views/widgets/common/search_bar.dart';
 import '../../views/consultation/medicine_tabs.dart';
@@ -18,7 +18,7 @@ class DoctorScreen extends StatefulWidget {
 
 class _DoctorScreenState extends State<DoctorScreen>
     with SingleTickerProviderStateMixin {
-  final DoctorController controller = Get.put(DoctorController());
+  final controller = Get.find<DoctorController>();
   late TabController _tabController;
 
   @override

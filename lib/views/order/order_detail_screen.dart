@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../views/widgets/order/order_info_card.dart';
 import '../../views/widgets/order/order_item_list.dart';
-import '../../controllers/order_controller.dart';
-import '../../models/orders_model.dart';
+import '../../controllers/medicine/order_controller.dart';
+import '../../models/medicine/orders_model.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   final Orders order;

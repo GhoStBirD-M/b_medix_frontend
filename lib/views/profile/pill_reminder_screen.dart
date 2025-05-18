@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/pill_reminder_controller.dart';
+import '../../controllers/profile/pill_reminder_controller.dart';
 import '../widgets/pill/reminder_card.dart';
 import '../widgets/pill/empty_reminder_state.dart';
 import '../widgets/pill/add_reminder_sheet.dart';

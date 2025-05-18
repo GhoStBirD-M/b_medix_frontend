@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/article/article_widgets.dart';
 import '../../views/widgets/common/search_bar.dart';
-import '../../controllers/article_controller.dart';
+import '../../controllers/article/article_controller.dart';
 import '../widgets/common/bottom_navigation.dart';
 
 class ArticleScreen extends StatelessWidget {
-  final ArticleController controller = Get.put(ArticleController());
+  final controller = Get.find<ArticleController>();
 
   ArticleScreen({super.key});
 

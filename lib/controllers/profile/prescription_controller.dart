@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../views/widgets/prescription/add_prescription_sheet.dart';
+import '../../views/widgets/prescription/add_prescription_sheet.dart';
 import 'package:uuid/uuid.dart';
-import '../models/prescription_model.dart';
+import '../../models/profile/prescription_model.dart';
 
 class PrescriptionController extends GetxController {
   final storage = GetStorage();

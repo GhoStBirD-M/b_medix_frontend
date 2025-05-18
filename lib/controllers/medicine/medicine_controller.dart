@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/medicine_model.dart';
-import '../services/medicine_service.dart';
+import '../../models/medicine/medicine_model.dart';
+import '../../services/medicine_service.dart';
 
 class MedicineController extends GetxController {
   final MedicineService _apiService = MedicineService();

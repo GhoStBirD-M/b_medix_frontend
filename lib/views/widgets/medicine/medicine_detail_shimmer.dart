@@ -7,6 +7,7 @@ class MedicineDetailShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Image placeholder
         Shimmer.fromColors(
@@ -19,7 +20,6 @@ class MedicineDetailShimmer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-
         // Title
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -34,7 +34,6 @@ class MedicineDetailShimmer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-
         // Price
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -49,7 +48,6 @@ class MedicineDetailShimmer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-
         // Details header
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -64,7 +62,6 @@ class MedicineDetailShimmer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-
         // Description
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

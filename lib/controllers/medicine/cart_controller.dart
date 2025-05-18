@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/orders_model.dart';
-import '../models/cart_model.dart';
-import '../models/cart_item_model.dart';
-import '../services/cart_service.dart';
+import '../home/notification_controller.dart';
+import '../../models/medicine/orders_model.dart';
+import '../../models/medicine/cart_model.dart';
+import '../../models/medicine/cart_item_model.dart';
+import '../../services/cart_service.dart';
 
 class CartController extends GetxController {
   final CartService _cartService = CartService();
+  final notifController = Get.find<NotificationController>();
 
   final Rx<Cart?> _cart = Rx<Cart?>(null);
   final Rx<Orders?> order = Rx<Orders?>(null);
@@ -61,6 +63,11 @@ class CartController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
+        );
+        notifController.addNotification(
+          'Keranjang',
+          'Obat telah ditambahkan ke keranjang',
+          Icons.add_shopping_cart_outlined,
         );
       }
     } catch (e) {
@@ -142,6 +149,11 @@ class CartController extends GetxController {
       isLoading.value = true;
       final result = await _cartService.checkoutCart(paymentMethod);
       order.value = result;
+      notifController.addNotification(
+        'Keranjang',
+        'Berhasil Checkout',
+        Icons.shopping_cart_checkout_outlined,
+      );
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -150,7 +162,6 @@ class CartController extends GetxController {
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
-      print(e);
     } finally {
       isLoading.value = false;
     }

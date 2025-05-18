@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../../controllers/cart_controller.dart';
-import '../../../models/cart_item_model.dart';
+import '../../../controllers/medicine/cart_controller.dart';
+import '../../../models/medicine/cart_item_model.dart';
 import 'package:flutter/material.dart';
 import '../../../views/widgets/order/quantity_button.dart';
 

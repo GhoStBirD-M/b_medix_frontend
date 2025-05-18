@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/prescription_controller.dart';
-import '../../../models/prescription_model.dart';
+import '../../../controllers/profile/prescription_controller.dart';
+import '../../../models/profile/prescription_model.dart';
 
 class PrescriptionItemWidget extends StatelessWidget {
   final Prescription prescription;

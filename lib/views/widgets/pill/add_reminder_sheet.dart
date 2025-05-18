@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/pill_reminder_model.dart';
+import '../../../models/profile/pill_reminder_model.dart';
 import '../../widgets/pill/frequency_chip.dart';
 
 class AddReminderSheet extends StatefulWidget {

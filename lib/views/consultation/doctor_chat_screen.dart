@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/doctor_model.dart';
+import '../../models/doctor/doctor_model.dart';
 import '../../routes/app_pages.dart';
-import '../../controllers/chat_controller.dart';
+import '../../controllers/doctor/chat_controller.dart';
 
 class DoctorChatScreen extends StatefulWidget {
   const DoctorChatScreen({super.key});
@@ -12,7 +12,7 @@ class DoctorChatScreen extends StatefulWidget {
 }
 
 class _DoctorChatScreenState extends State<DoctorChatScreen> {
-  final ChatController chatController = Get.put(ChatController());
+  final controller = Get.find<ChatController>();
   final TextEditingController messageController = TextEditingController();
 
   @override
@@ -20,7 +20,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
     super.initState();
     final id = Get.parameters['id'];
     if (id != null) {
-      chatController.setDoctorId(int.tryParse(id) ?? 0);
+      controller.setDoctorId(int.tryParse(id) ?? 0);
     }
   }
 
@@ -119,11 +119,11 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
             Expanded(
               child: Obx(() {
                 return ListView.builder(
-                    controller: chatController.scrollController,
+                    controller: controller.scrollController,
                     padding: const EdgeInsets.all(16.0),
-                    itemCount: chatController.messages.length,
+                    itemCount: controller.messages.length,
                     itemBuilder: (context, index) {
-                      final chat = chatController.messages[index];
+                      final chat = controller.messages[index];
                       final isUser = chat.sender == 'user';
                       return Align(
                         alignment: isUser
@@ -194,9 +194,9 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                     onTap: () async {
                       final msg = messageController.text.trim();
                       if (msg.isNotEmpty) {
-                        chatController.sendMessage(msg);
+                        controller.sendMessage(msg);
                         messageController.clear();
-                        await chatController.fetchChatHistory();
+                        await controller.fetchChatHistory();
                       }
                     },
                     child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/order_item_model.dart';
+import '../../../models/medicine/order_item_model.dart';
 
 class OrderItemCard extends StatelessWidget {
   final OrderItemModel item;

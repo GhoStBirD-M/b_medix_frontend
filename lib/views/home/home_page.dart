@@ -4,7 +4,7 @@ import '../../routes/app_pages.dart';
 import '../../views/profile/prescription_screen.dart';
 import '../widgets/article/article_widgets.dart';
 import '../widgets/medicine/medicine_widgets.dart';
-import '../../controllers/home_barrel.dart';
+import '../../controllers/home/home_barrel.dart';
 import '../widgets/common/common_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,10 +17,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentBannerIndex = 0;
   final PageController _bannerController = PageController();
-  final HomeController homeController = Get.find<HomeController>();
-  final MedicineController medicineController = Get.put(MedicineController());
-  final ArticleController articleController = Get.put(ArticleController());
-  final AuthController authController = Get.find<AuthController>();
+  final homeController = Get.find<HomeController>();
+  final medicineController = Get.find<MedicineController>();
+  final articleController = Get.find<ArticleController>();
+  final authController = Get.find<AuthController>();
 
   @override
   void dispose() {
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                                           arguments: 1,
                                         )),
                                 PromotionBanner(
-                                    title: 'BACA ARTIKEL KESEHATAN',
+                                    title: 'ARTIKEL KESEHATAN',
                                     description:
                                         'Baca tips sehat, info penyakit, dan gaya hidup sehat.',
                                     discount: 'ARTIKEL BARU TIAP MINGGU',
@@ -113,8 +113,8 @@ class _HomePageState extends State<HomePage> {
                                 PromotionBanner(
                                     title: 'KONSULTASI DOKTER',
                                     description:
-                                        'Butuh saran medis cepat? Konsultasi langsung dari rumah.',
-                                    discount: 'GRATIS UNTUK PENGGUNA BARU',
+                                        'Butuh saran medis cepat? Tanya langsung dari rumah.',
+                                    discount: 'GRATIS TANPA BIAYA',
                                     buttonText: 'CHAT SEKARANG',
                                     color: const Color(0xFFF3E5F5),
                                     imageAssetPath:

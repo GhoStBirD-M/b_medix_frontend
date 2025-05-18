@@ -1,6 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 import 'dart:convert';
-import '../models/pill_reminder_model.dart';
+import '../models/profile/pill_reminder_model.dart';
 
 class PillService {
   static const String _storageKey = 'pill_reminders';

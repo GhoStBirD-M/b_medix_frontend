@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/address_controller.dart';
-import '../../../models/address_model.dart';
+import '../../../controllers/profile/address_controller.dart';
+import '../../../models/profile/address_model.dart';
 
 class AddAddressScreen extends StatefulWidget {
   final Address? address;

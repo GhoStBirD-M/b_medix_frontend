@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
-import '../models/article_model.dart';
+import '../models/article/article_model.dart';
 import '../utils/constants.dart';
 import 'package:http/http.dart' as http;
 

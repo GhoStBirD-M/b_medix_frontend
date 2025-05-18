@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../controllers/doctor_controller.dart';
+import '../controllers/doctor/doctor_controller.dart';
 
 class DoctorBinding extends Bindings {
   @override

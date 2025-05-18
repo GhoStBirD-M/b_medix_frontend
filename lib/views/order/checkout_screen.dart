@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/cart_controller.dart';
+import '../../controllers/medicine/cart_controller.dart';
 import '../../views/widgets/order/order_widgets.dart';
 import 'qris_payment_screen.dart';
 import 'success_screen.dart';

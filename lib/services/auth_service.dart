@@ -1,5 +1,5 @@
 import 'package:get_storage/get_storage.dart';
-import '../../models/user_model.dart';
+import '../models/auth/user_model.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/constants.dart';
 import 'dart:convert';

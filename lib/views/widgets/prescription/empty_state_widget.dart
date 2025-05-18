@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/prescription_controller.dart';
+import '../../../controllers/profile/prescription_controller.dart';
 
 
 class EmptyStateWidget extends StatelessWidget {

@@ -2,6 +2,7 @@
 
 import 'package:get/get.dart';
 import '../../routes/login_redirect_middleware.dart';
+import '../bindings/order_binding.dart';
 import '../bindings/bindings.dart';
 import '../views/article/articles.dart';
 import '../views/auth/auth.dart';
@@ -96,6 +97,7 @@ class AppPages {
     GetPage(
       name: ORDERS,
       page: () => OrdersScreen(),
+      binding: OrderBinding(),
       middlewares: [AuthMiddleware()],
     ),
   ];

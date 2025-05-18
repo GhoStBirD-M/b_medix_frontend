@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../models/medicine_model.dart';
+import '../../../models/medicine/medicine_model.dart';
 
 class MedicineCard extends StatelessWidget {
   final Medicine medicine;

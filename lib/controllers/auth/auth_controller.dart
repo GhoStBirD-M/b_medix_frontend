@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../models/user_model.dart';
-import '../routes/app_pages.dart';
-import '../services/auth_service.dart';
+import '../../models/auth/user_model.dart';
+import '../../routes/app_pages.dart';
+import '../../services/auth_service.dart';
 
 class AuthController extends GetxController {
   final AuthService _authService = AuthService();

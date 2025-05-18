@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../utils/constants.dart';
-import '../models/orders_model.dart';
+import '../models/medicine/orders_model.dart';
 
 class OrderService {
   final box = GetStorage();

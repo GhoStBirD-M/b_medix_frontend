@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/chat_model.dart';
-import '../services/chat_service.dart';
+import '../../models/doctor/chat_model.dart';
+import '../../services/chat_service.dart';
 
 class ChatController extends GetxController {
   final ChatService _apiService = Get.find<ChatService>();
