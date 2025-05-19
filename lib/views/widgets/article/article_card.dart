@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -56,9 +54,7 @@ class ArticleCard extends StatelessWidget {
                     bottomLeft: Radius.circular(12),
                   ),
                   image: DecorationImage(
-                    image: NetworkImage(
-                      "https://picsum.photos/200?random=${Random().nextInt(1000)}",
-                    ),
+                    image: NetworkImage(article.image),
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -16,7 +16,7 @@ class Article {
 
 class ArticleElement {
   final int id;
-  final dynamic image;
+  final String image;
   final String author;
   final String title;
   final String content;
@@ -36,7 +36,7 @@ class ArticleElement {
   factory ArticleElement.fromJson(Map<String, dynamic> json) {
     return ArticleElement(
       id: json["id"],
-      image: json["image"],
+      image: 'https://b-medix.im-fall.my.id/storage/${json['image']}',
       author: json["author"],
       title: json["title"],
       content: json["content"],

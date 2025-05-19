@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import '../views/home/onboarding_screen.dart';
 import '../../routes/login_redirect_middleware.dart';
 import '../bindings/order_binding.dart';
 import '../bindings/bindings.dart';
@@ -16,6 +17,7 @@ import '../views/home/home_page.dart';
 
 class AppPages {
   static const SPLASH = '/';
+  static const ONBOARDING = '/onboarding';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const HOME = '/home';
@@ -33,6 +35,10 @@ class AppPages {
       name: SPLASH,
       page: () => SplashScreen(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: ONBOARDING,
+      page: () => OnboardingScreen(),
     ),
     GetPage(
       name: LOGIN,

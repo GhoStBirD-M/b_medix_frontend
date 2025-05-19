@@ -14,7 +14,7 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFD1E8E6),
+        color: Colors.teal[50],
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),

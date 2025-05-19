@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                                         'Beli obat dengan harga spesial dan diskon hingga 30%.',
                                     discount: 'HEMAT HINGGA 30%*',
                                     buttonText: 'BELI SEKARANG',
-                                    color: const Color(0xFFD7D0FF),
+                                    color: Colors.purple.shade100,
                                     imageAssetPath:
                                         'assets/images/medicine_promo.png',
                                     onPressed: () => Get.toNamed(
@@ -90,9 +90,9 @@ class _HomePageState extends State<HomePage> {
                                     title: 'ARTIKEL KESEHATAN',
                                     description:
                                         'Baca tips sehat, info penyakit, dan gaya hidup sehat.',
-                                    discount: 'ARTIKEL BARU TIAP MINGGU',
+                                    discount: 'ARTIKEL BARU',
                                     buttonText: 'BACA ARTIKEL',
-                                    color: const Color(0xFFFFF3E0),
+                                    color: Colors.amber.shade100,
                                     imageAssetPath:
                                         'assets/images/health_articles.png',
                                     onPressed: () => Get.toNamed(
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                                         'Unggah resep dari dokter untuk pengingat obat.',
                                     discount: 'MUDAH, CEPAT, DAN AMAN',
                                     buttonText: 'UNGGAH RESEP',
-                                    color: const Color(0xFFE8F5E9),
+                                    color: Colors.lightGreen.shade100,
                                     imageAssetPath:
                                         'assets/images/upload_prescription.png',
                                     onPressed: () => Get.to(
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                                         'Butuh saran medis cepat? Tanya langsung dari rumah.',
                                     discount: 'GRATIS TANPA BIAYA',
                                     buttonText: 'CHAT SEKARANG',
-                                    color: const Color(0xFFF3E5F5),
+                                    color: Colors.lightBlue.shade100,
                                     imageAssetPath:
                                         'assets/images/doctor_consult.png',
                                     onPressed: () => Get.toNamed(
@@ -158,8 +158,9 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             TextButton(
-                                onPressed: () =>
-                                    Get.toNamed(AppPages.CONSULTATION, arguments: 1),
+                                onPressed: () => Get.toNamed(
+                                    AppPages.CONSULTATION,
+                                    arguments: 1),
                                 child: const Text('See all')),
                           ],
                         ),

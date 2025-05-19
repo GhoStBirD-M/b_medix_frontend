@@ -33,19 +33,17 @@ class ArticleDetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (article.image != null &&
-                    article.image.toString().isNotEmpty)
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: NetworkImage(article.image.toString()),
-                        fit: BoxFit.cover,
-                      ),
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: NetworkImage(article.image),
+                      fit: BoxFit.cover,
                     ),
                   ),
+                ),
                 SizedBox(height: 16),
                 Text(
                   article.title,
