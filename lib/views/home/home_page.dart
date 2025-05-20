@@ -22,17 +22,36 @@ class _HomePageState extends State<HomePage> {
   final articleController = Get.find<ArticleController>();
   final authController = Get.find<AuthController>();
 
-  @override
-  void dispose() {
-    _bannerController.dispose();
-    super.dispose();
-  }
+  // Global keys for coach mark targets
+  final GlobalKey _notificationKey = GlobalKey();
+  final GlobalKey _cartKey = GlobalKey();
+  final GlobalKey _bannerKey = GlobalKey();
+  final GlobalKey _productsKey = GlobalKey();
+  final GlobalKey _articlesKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     Get.find<MedicineController>().fetchTopMedicines();
     Get.find<ArticleController>().fetchTopArticles();
+
+    // Trigger tutorial after UI is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      homeController.showTutorial(
+        context,
+        notificationKey: _notificationKey,
+        cartKey: _cartKey,
+        bannerKey: _bannerKey,
+        productsKey: _productsKey,
+        articlesKey: _articlesKey,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _bannerController.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,6 +72,8 @@ class _HomePageState extends State<HomePage> {
                 greeting: 'How was Ur Health?',
                 name: user.name,
                 profilePic: 'assets/images/profile.jpg',
+                notificationKey: _notificationKey, // Pass key to Header
+                cartKey: _cartKey, // Pass key to Header
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -64,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 16),
                         LayoutBuilder(builder: (context, constraints) {
                           return SizedBox(
+                            key: _bannerKey, // Assign key to banner
                             height: constraints.maxWidth * 0.5,
                             child: PageView(
                               controller: _bannerController,
@@ -150,6 +172,7 @@ class _HomePageState extends State<HomePage> {
 
                         // Products
                         Row(
+                          key: _productsKey, // Assign key to products section
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
@@ -218,6 +241,7 @@ class _HomePageState extends State<HomePage> {
 
                         // Articles
                         Row(
+                          key: _articlesKey, // Assign key to articles section
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text('Popular Article',
@@ -235,7 +259,7 @@ class _HomePageState extends State<HomePage> {
                             return ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 3, // jumlah shimmer cards saat loading
+                              itemCount: 3,
                               itemBuilder: (context, index) =>
                                   const ArticleCardShimmer(),
                             );

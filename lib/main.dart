@@ -8,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/date_symbol_data_local.dart';
-// import '../controllers/home_controller.dart';
 import '../routes/app_pages.dart';
 import 'controllers/home/notification_controller.dart';
 

@@ -7,12 +7,16 @@ class Header extends StatelessWidget {
   final String greeting;
   final String name;
   final String profilePic;
+  final GlobalKey? notificationKey; // Add key for notification icon
+  final GlobalKey? cartKey; // Add key for cart icon
 
   const Header({
     super.key,
     required this.greeting,
     required this.name,
     required this.profilePic,
+    this.notificationKey,
+    this.cartKey,
   });
 
   @override
@@ -27,9 +31,6 @@ class Header extends StatelessWidget {
             radius: 24,
             backgroundImage: AssetImage(profilePic),
             backgroundColor: Colors.white,
-            child: profilePic == '/placeholder.svg'
-                ? const Icon(Icons.person, size: 30, color: Colors.grey)
-                : null,
           ),
           const SizedBox(width: 12),
           
@@ -57,12 +58,14 @@ class Header extends StatelessWidget {
           ),
           
           IconButton(
+            key: notificationKey, // Assign key to notification icon
             icon: const Icon(Icons.notifications_outlined),
             color: Colors.black,
             onPressed: () => Get.to(NotificationScreen()),
           ),
           
           IconButton(
+            key: cartKey, // Assign key to cart icon
             icon: const Icon(Icons.shopping_cart_outlined),
             color: Colors.black,
             onPressed: () {

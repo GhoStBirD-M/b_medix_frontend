@@ -98,7 +98,7 @@ class SuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        paymentMethod,
+                        paymentMethod.toUpperCase(),
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

@@ -65,7 +65,7 @@ class OrderItemCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '\$${item.price.toStringAsFixed(2)}',
+                        'Rp.${item.price.toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

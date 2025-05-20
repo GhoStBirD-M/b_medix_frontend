@@ -39,7 +39,7 @@ class OrderInfoCard extends StatelessWidget {
             InfoRow(label: 'Payment Method', value: order.paymentMethod),
             InfoRow(
                 label: 'Total Price',
-                value: '\$${order.totalPrice.toStringAsFixed(2)}'),
+                value: 'Rp.${order.totalPrice.toStringAsFixed(2)}'),
             InfoRow(label: 'User ID', value: order.userId.toString()),
           ],
         ),

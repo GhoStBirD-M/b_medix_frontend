@@ -1,0 +1,2 @@
+C:/Users/Administrator/Documents/me/b_medix_frontend/android/app/.cxx/RelWithDebInfo/492e501y/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/Documents/me/b_medix_frontend/android/app/.cxx/RelWithDebInfo/492e501y/armeabi-v7a/CMakeFiles/rebuild_cache.dir
