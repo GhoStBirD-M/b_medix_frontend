@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../controllers/home/onboarding_controller.dart';
-import '../widgets/common/onboarding_item.dart';
+import '../widgets/home/onboarding_item.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

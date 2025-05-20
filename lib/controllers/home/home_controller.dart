@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import 'package:flutter/material.dart';
+import '../../views/widgets/home/exit_confirmation_dialog.dart';
 import '../../models/auth/user_model.dart';
 
 class HomeController extends GetxController {
@@ -236,5 +237,20 @@ class HomeController extends GetxController {
         paddingFocus: 5, // Match banner's tighter highlight
       ),
     ];
+  }
+
+  Future<bool> showExitConfirmationDialog() async {
+    bool exitConfirmed = false;
+
+    await Get.dialog(
+      ExitConfirmationDialog(
+        onConfirm: (value) => exitConfirmed = value,
+      ),
+      barrierDismissible: false,
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionCurve: Curves.easeInOut,
+    );
+
+    return exitConfirmed;
   }
 }

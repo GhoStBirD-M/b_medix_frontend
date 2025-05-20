@@ -10,7 +10,7 @@ class EmptyStateWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.shopping_basket_outlined,
+            Icons.remove_shopping_cart_outlined,
             size: 80,
             color: Colors.grey[400],
           ),

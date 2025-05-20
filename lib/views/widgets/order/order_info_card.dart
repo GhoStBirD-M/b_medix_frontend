@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import '../../../controllers/profile/address_controller.dart';
 import '../../../controllers/medicine/order_controller.dart';
 import '../../../models/medicine/orders_model.dart';
 import '../../../views/widgets/order/info_row.dart';
@@ -7,10 +10,13 @@ class OrderInfoCard extends StatelessWidget {
   final Orders order;
   final OrderController controller;
 
-  const OrderInfoCard({super.key, required this.order, required this.controller});
+  const OrderInfoCard(
+      {super.key, required this.order, required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final AddressController addressController = Get.put(AddressController());
+
     return Card(
       color: Colors.white,
       elevation: 3,
@@ -36,11 +42,19 @@ class OrderInfoCard extends StatelessWidget {
             InfoRow(label: 'Order ID', value: '#${order.id}'),
             InfoRow(
                 label: 'Date', value: controller.formatDate(order.createdAt)),
-            InfoRow(label: 'Payment Method', value: order.paymentMethod),
+            InfoRow(
+                label: 'Payment Method',
+                value: order.paymentMethod.toUpperCase()),
             InfoRow(
                 label: 'Total Price',
-                value: 'Rp.${order.totalPrice.toStringAsFixed(2)}'),
-            InfoRow(label: 'User ID', value: order.userId.toString()),
+                value:
+                    'Rp.${NumberFormat.decimalPattern('id_ID').format(order.totalPrice)}'),
+            InfoRow(label: 'Delivery', value: 'Rp. 10.000'),
+            InfoRow(
+              label: 'Address',
+              value: addressController.defaultAddress?.fullAddress ??
+                  'No address set',
+            ),
           ],
         ),
       ),

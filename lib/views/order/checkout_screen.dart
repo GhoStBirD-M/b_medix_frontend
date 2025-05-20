@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import '../../controllers/profile/address_controller.dart';
 import '../../controllers/medicine/cart_controller.dart';
 import '../../views/widgets/order/order_widgets.dart';
 import 'qris_payment_screen.dart';
@@ -20,6 +22,7 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   String? selectedPaymentMethod;
   final CartController cartController = Get.put(CartController());
+  final addressController = Get.put(AddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +87,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ),
                     Text(
-                      'Rp ${(widget.totalAmount - 10000).toStringAsFixed(0)}',
+                      'Rp ${NumberFormat.decimalPattern('id_ID').format(widget.totalAmount - 10000)}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -127,7 +130,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ),
                     Text(
-                      'Rp ${widget.totalAmount.toStringAsFixed(0)}',
+                      'Rp ${NumberFormat.decimalPattern('id_ID').format(widget.totalAmount)}',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -145,17 +148,28 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     onPressed: selectedPaymentMethod == null
                         ? null
                         : () async {
+                            if (addressController.defaultAddress == null) {
+                              Get.snackbar(
+                                'Alamat belum dipilih',
+                                'Silakan tambahkan alamat terlebih dahulu.',
+                                backgroundColor: Colors.orange,
+                                colorText: Colors.white,
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                              return;
+                            }
                             try {
                               await cartController
                                   .checkoutCart(selectedPaymentMethod!);
                               if (selectedPaymentMethod == 'qris') {
-                                Get.to(QrisPaymentScreen(
+                                Get.offAll(QrisPaymentScreen(
                                     amount: widget.totalAmount));
                               } else if (selectedPaymentMethod == 'tunai') {
                                 Get.to(SuccessScreen(
                                   paymentMethod: selectedPaymentMethod!,
                                   orderId:
                                       "ORD-${DateTime.now().millisecondsSinceEpoch}",
+                                  total: widget.totalAmount.toString(),
                                 ));
                               }
                             } catch (e) {

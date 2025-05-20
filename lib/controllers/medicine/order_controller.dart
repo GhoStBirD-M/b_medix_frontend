@@ -36,7 +36,7 @@ class OrderController extends GetxController {
   // Delete an order if status is "completed"
   Future<void> deleteOrder(Orders order) async {
     // Check if order status is "completed"
-    if (order.status.toLowerCase() != "completed") {
+    if (order.status.toLowerCase() != "completed" && order.status.toLowerCase() != "cancelled") {
       Get.snackbar(
         'Cannot Delete',
         'Only completed orders can be deleted',

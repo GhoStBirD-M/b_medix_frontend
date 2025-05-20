@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../controllers/medicine/order_controller.dart';
 import '../../../models/medicine/orders_model.dart';
 import '../../../views/order/order_detail_screen.dart';
@@ -58,7 +59,7 @@ class OrderCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Total: Rp.${order.totalPrice.toStringAsFixed(2)}',
+                'Total: Rp.${NumberFormat.decimalPattern('id_ID').format(order.totalPrice + 10000)}',
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,

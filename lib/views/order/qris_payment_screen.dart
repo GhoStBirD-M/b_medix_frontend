@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../views/widgets/order/order_widgets.dart';
 import 'success_screen.dart';
 
@@ -75,7 +76,7 @@ class _QrisPaymentScreenState extends State<QrisPaymentScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Rp ${widget.amount.toStringAsFixed(0)}',
+                  'Rp ${NumberFormat.decimalPattern('id_ID').format(widget.amount)}',
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -165,7 +166,10 @@ class _QrisPaymentScreenState extends State<QrisPaymentScreen> {
                   ),
                 );
                 Future.delayed(const Duration(seconds: 2), () {
-                  Get.to(SuccessScreen(paymentMethod: paymentMethod, orderId: "MEDORD-${DateTime.now().millisecondsSinceEpoch}"));
+                  Get.to(SuccessScreen(
+                    paymentMethod: paymentMethod, 
+                    orderId: "MEDORD-${DateTime.now().millisecondsSinceEpoch}", 
+                    total: widget.amount.toString()));
                 });
               },
             ),

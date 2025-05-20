@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../routes/app_pages.dart';
 import '../widgets/article/article_widgets.dart';
-import '../../views/widgets/common/search_bar.dart';
+import '../widgets/home/search_bar.dart';
 import '../../controllers/article/article_controller.dart';
-import '../widgets/common/bottom_navigation.dart';
+import '../widgets/home/bottom_navigation.dart';
 
 class ArticleScreen extends StatelessWidget {
   final controller = Get.find<ArticleController>();
@@ -12,70 +13,76 @@ class ArticleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Articles',
-            style: TextStyle(
-              color: Color(0xFF151921),
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600,
-            )),
-        centerTitle: true,
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAllNamed(AppPages.HOME);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Articles',
+              style: TextStyle(
+                color: Color(0xFF151921),
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              )),
+          centerTitle: true,
+          backgroundColor: Colors.grey.shade100,
+        ),
         backgroundColor: Colors.grey.shade100,
-      ),
-      backgroundColor: Colors.grey.shade100,
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 6,
-            itemBuilder: (context, index) => const ArticleCardShimmer(),
-          );
-        } else {
-          return RefreshIndicator(
-            onRefresh: controller.fetchArticles,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              children: [
-                CustomSearchBar(
-                    hintText: 'Search Articles',
-                    onChanged: controller.setSearchQuery),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                  child: Text(
-                    'Health News Articles',
-                    style: TextStyle(
-                      color: Color(0xFF151921),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
+        body: Obx(() {
+          if (controller.isLoading.value) {
+            return ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 6,
+              itemBuilder: (context, index) => const ArticleCardShimmer(),
+            );
+          } else {
+            return RefreshIndicator(
+              onRefresh: controller.fetchArticles,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                children: [
+                  CustomSearchBar(
+                      hintText: 'Search Articles',
+                      onChanged: controller.setSearchQuery),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    child: Text(
+                      'Health News Articles',
+                      style: TextStyle(
+                        color: Color(0xFF151921),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                ),
-                if (controller.articles.isEmpty)
-                  const Padding(
-                    padding: EdgeInsets.only(top: 60),
-                    child: Center(child: Text('No articles found')),
-                  )
-                else
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.articles.length,
-                    itemBuilder: (context, index) {
-                      final article = controller.articles[index];
-                      return ArticleCard(
-                          article: article, controller: controller);
-                    },
-                  ),
-              ],
-            ),
-          );
-        }
-      }),
-      bottomNavigationBar: BottomNavigation(currentIndex: 2),
+                  if (controller.articles.isEmpty)
+                    const Padding(
+                      padding: EdgeInsets.only(top: 60),
+                      child: Center(child: Text('No articles found')),
+                    )
+                  else
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.articles.length,
+                      itemBuilder: (context, index) {
+                        final article = controller.articles[index];
+                        return ArticleCard(
+                            article: article, controller: controller);
+                      },
+                    ),
+                ],
+              ),
+            );
+          }
+        }),
+        bottomNavigationBar: BottomNavigation(currentIndex: 2),
+      ),
     );
   }
 }

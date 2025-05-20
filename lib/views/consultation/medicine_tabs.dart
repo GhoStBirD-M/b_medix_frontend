@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../routes/app_pages.dart';
-import '../widgets/common/search_bar.dart';
+import '../widgets/home/search_bar.dart';
 import '../widgets/medicine/medicine_widgets.dart';
 import '../../controllers/medicine/medicine_controller.dart';
 

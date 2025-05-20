@@ -46,13 +46,6 @@ class AddressScreen extends StatelessWidget {
           },
         );
       }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(() => AddAddressScreen());
-        },
-        backgroundColor: Colors.teal,
-        child: Icon(Icons.add),
-      ),
     );
   }
 

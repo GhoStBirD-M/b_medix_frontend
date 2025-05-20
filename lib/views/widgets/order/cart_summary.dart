@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../views/order/checkout_screen.dart';
 import '../../../controllers/medicine/cart_controller.dart';
 
@@ -36,7 +37,7 @@ class CartSummary extends StatelessWidget {
                 ),
               ),
               Obx(() => Text(
-                    'Rp ${cartController.subtotal.toStringAsFixed(2)}',
+                    'Rp ${NumberFormat.decimalPattern('id_ID').format(cartController.subtotal)}',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -56,7 +57,7 @@ class CartSummary extends StatelessWidget {
                 ),
               ),
               Obx(() => Text(
-                    'Rp ${cartController.deliveryFee.toStringAsFixed(2)}',
+                    'Rp ${NumberFormat.decimalPattern('id_ID').format(cartController.deliveryFee)}',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -76,7 +77,7 @@ class CartSummary extends StatelessWidget {
                 ),
               ),
               Obx(() => Text(
-                    'Rp ${cartController.total.toStringAsFixed(2)}',
+                    'Rp ${NumberFormat.decimalPattern('id_ID').format(cartController.total)}',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

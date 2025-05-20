@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../models/medicine/order_item_model.dart';
 
 class OrderItemCard extends StatelessWidget {
@@ -65,7 +66,7 @@ class OrderItemCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Rp.${item.price.toStringAsFixed(2)}',
+                        'Rp.${NumberFormat.decimalPattern('id_ID').format(item.price)}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

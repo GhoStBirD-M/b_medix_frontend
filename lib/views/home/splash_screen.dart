@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal.shade600,
+      backgroundColor: Colors.teal.shade500,
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,
@@ -109,11 +109,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 ),
               ),
               const SizedBox(height: 40),
-              // Loading indicator
-              CircularProgressIndicator(
-                color: Colors.white.withOpacity(0.8),
-                strokeWidth: 3,
-              ),
             ],
           ),
         ),

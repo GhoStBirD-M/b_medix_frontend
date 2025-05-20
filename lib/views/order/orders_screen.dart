@@ -44,7 +44,18 @@ class OrdersScreen extends StatelessWidget {
         }
         if (controller.orders.isEmpty) {
           return const Center(
-            child: Text('No orders found'),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.remove_shopping_cart_outlined, size: 80, color: Colors.grey),
+                SizedBox(height: 16),
+                Text('No orders found',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey)),
+              ],
+            ),
           );
         }
         return RefreshIndicator(

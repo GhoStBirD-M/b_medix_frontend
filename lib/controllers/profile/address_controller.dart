@@ -11,6 +11,9 @@ class AddressController extends GetxController {
   RxList<Address> addresses = <Address>[].obs;
   RxBool isLoading = false.obs;
 
+  Address? get defaultAddress =>
+    addresses.firstWhereOrNull((a) => a.isDefault);
+
   @override
   void onInit() {
     super.onInit();

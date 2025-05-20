@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../routes/app_pages.dart';
 import '../../views/widgets/medicine/medicine_detail_shimmer.dart';
 import '../../controllers/medicine/cart_controller.dart';
@@ -74,7 +75,7 @@ class MedicineDetailScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Rp ${medicine.price}',
+                            'Rp ${NumberFormat.decimalPattern('id_ID').format(double.parse(medicine.price))}',
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,

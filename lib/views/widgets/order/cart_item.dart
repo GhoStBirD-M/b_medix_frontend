@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../controllers/medicine/cart_controller.dart';
 import '../../../models/medicine/cart_item_model.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class CartItemWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Rp ${item.medicine?.price ?? "0"}',
+                  'Rp ${NumberFormat.decimalPattern('id_ID').format(double.parse(item.medicine?.price ?? '0'))}',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
