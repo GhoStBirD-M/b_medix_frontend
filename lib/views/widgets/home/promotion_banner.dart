@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class PromotionBanner extends StatelessWidget {
   final String title;
   final String description;
-  final String discount;
   final String buttonText;
   final Color color;
   final String imageAssetPath;
@@ -13,7 +12,6 @@ class PromotionBanner extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    required this.discount,
     required this.buttonText,
     required this.color,
     required this.imageAssetPath,
@@ -95,7 +93,7 @@ class PromotionBanner extends StatelessWidget {
                         Text(
                           title,
                           style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 0.3,
                             shadows: [
@@ -111,36 +109,14 @@ class PromotionBanner extends StatelessWidget {
                         Text(
                           description,
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 10,
                             height: 1.3,
                             color: Colors.black87.withOpacity(0.8),
                           ),
                         ),
                         const SizedBox(height: 6),
 
-                        // Discount badge
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.25),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Colors.lightGreen.withOpacity(0.5),
-                              width: 1,
-                            ),
-                          ),
-                          child: Text(
-                            discount,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.lightGreen,
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 10),
+                        // const SizedBox(height: 10),
                         SizedBox(
                           height: 32,
                           child: ElevatedButton(
@@ -159,7 +135,12 @@ class PromotionBanner extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(buttonText),
+                                Text(
+                                  buttonText,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
                                 const SizedBox(width: 4),
                                 const Icon(Icons.arrow_forward, size: 14),
                               ],

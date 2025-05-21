@@ -104,7 +104,6 @@ class _HomePageState extends State<HomePage> {
                                       title: 'DISKON OBAT HARI INI!',
                                       description:
                                           'Beli obat dengan harga spesial dan diskon hingga 30%.',
-                                      discount: 'HEMAT HINGGA 30%*',
                                       buttonText: 'BELI SEKARANG',
                                       color: Colors.purple.shade100,
                                       imageAssetPath:
@@ -117,7 +116,6 @@ class _HomePageState extends State<HomePage> {
                                       title: 'ARTIKEL KESEHATAN',
                                       description:
                                           'Baca tips sehat, info penyakit, dan gaya hidup sehat.',
-                                      discount: 'ARTIKEL BARU',
                                       buttonText: 'BACA ARTIKEL',
                                       color: Colors.amber.shade100,
                                       imageAssetPath:
@@ -129,7 +127,6 @@ class _HomePageState extends State<HomePage> {
                                       title: 'PUNYA RESEP DOKTER?',
                                       description:
                                           'Unggah resep dari dokter untuk pengingat obat.',
-                                      discount: 'MUDAH, CEPAT, DAN AMAN',
                                       buttonText: 'UNGGAH RESEP',
                                       color: Colors.lightGreen.shade100,
                                       imageAssetPath:
@@ -141,7 +138,6 @@ class _HomePageState extends State<HomePage> {
                                       title: 'KONSULTASI DOKTER',
                                       description:
                                           'Butuh saran medis cepat? Tanya langsung dari rumah.',
-                                      discount: 'GRATIS TANPA BIAYA',
                                       buttonText: 'CHAT SEKARANG',
                                       color: Colors.lightBlue.shade100,
                                       imageAssetPath:
