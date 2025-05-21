@@ -77,6 +77,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
       bytes.addAll(generator.text('Method     : $paymentMethod'));
       bytes.addAll(generator.text(
           'Date       : ${DateFormat('dd MMM yyyy').format(DateTime.now())}'));
+      bytes.addAll(generator.text('Total     : Rp ${NumberFormat.decimalPattern('id_ID').format(double.parse(widget.total).round())}'));
       bytes.addAll(generator.text('-----------------------------'));
       bytes.addAll(generator.text('Thank you!',
           styles: PosStyles(align: PosAlign.center)));
