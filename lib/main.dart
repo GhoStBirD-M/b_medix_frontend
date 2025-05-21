@@ -1,4 +1,4 @@
-// import 'package:device_preview/device_preview.dart';
+import 'package:device_preview/device_preview.dart';
 // import 'package:flutter/foundation.dart';
 // import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
@@ -24,13 +24,13 @@ void main() async {
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Jakarta'));
 
-  // runApp(DevicePreview(
-  //   defaultDevice: Devices.ios.iPhone13ProMax,
-  //   enabled: true,
-  //   builder: (context) => MyApp(),
-  // ));
+  runApp(DevicePreview(
+    defaultDevice: Devices.ios.iPhone13ProMax,
+    enabled: true,
+    builder: (context) => MyApp(),
+  ));
 
-  runApp(MyApp());
+  // runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

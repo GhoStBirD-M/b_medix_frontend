@@ -60,7 +60,7 @@ class OrderController extends GetxController {
           'Order deleted successfully',
           backgroundColor: Colors.green,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
         );
       } else {
         Get.snackbar(

@@ -23,16 +23,24 @@ class AuthService {
       if (data['user'] == null || data['token'] == null) {
         throw Exception('Data user atau token tidak ditemukan di response');
       }
+
       final user = User.fromJson(data['user']);
 
-      // Save token
+      // Simpan token dan user
       box.write('token', data['token']);
-      print('TOKEN: ${box.read('token')}');
       box.write('user', jsonEncode(data['user']));
+      print('TOKEN: ${box.read('token')}');
 
       return user;
+    } else if (response.statusCode == 401) {
+      throw Exception('Email atau password salah atau user tidak terdaftar');
     } else {
-      throw Exception('Failed to login');
+      try {
+        final error = jsonDecode(response.body);
+        throw Exception(error['message'] ?? 'Failed to login');
+      } catch (e) {
+        throw Exception('Failed to login: $e');
+      }
     }
   }
 

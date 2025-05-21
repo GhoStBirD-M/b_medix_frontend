@@ -68,8 +68,9 @@ class AddressController extends GetxController {
     Get.snackbar(
       'Success',
       'Address added successfully',
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.green,
+      colorText: Colors.white,
     );
   }
 
@@ -90,8 +91,9 @@ class AddressController extends GetxController {
       Get.snackbar(
         'Success',
         'Address updated successfully',
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.green,
+        colorText: Colors.white,
       );
     }
   }
@@ -102,8 +104,9 @@ class AddressController extends GetxController {
     Get.snackbar(
       'Success',
       'Address deleted successfully',
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.green,
+      colorText: Colors.white,
     );
   }
 
@@ -119,8 +122,9 @@ class AddressController extends GetxController {
     Get.snackbar(
       'Success',
       'Default address updated',
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.green,
+      colorText: Colors.white,
     );
   }
 }

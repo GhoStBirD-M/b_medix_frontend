@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/profile/local_notification.dart';
@@ -30,13 +29,12 @@ class NotificationController extends GetxController {
     }
   }
 
-  void addNotification(String title, String message, IconData icon) {
+  void addNotification(String title, String message, String iconName) {
     final newNotif = LocalNotification(
       title: title,
       message: message,
       timestamp: DateTime.now(),
-      iconCode: icon.codePoint,
-      iconFontFamily: icon.fontFamily ?? 'MaterialIcons',
+      iconName: iconName,
     );
 
     notifications.add(newNotif);

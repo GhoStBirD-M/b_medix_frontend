@@ -62,12 +62,12 @@ class CartController extends GetxController {
           'Item added to cart',
           backgroundColor: Colors.green,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
         );
         notifController.addNotification(
           'Keranjang',
           'Obat telah ditambahkan ke keranjang',
-          Icons.add_shopping_cart_outlined,
+          'add_shopping_cart_outlined',
         );
       }
     } catch (e) {
@@ -128,7 +128,7 @@ class CartController extends GetxController {
           'Item removed from cart',
           backgroundColor: Colors.green,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
         );
       }
     } catch (e) {
@@ -152,7 +152,7 @@ class CartController extends GetxController {
       notifController.addNotification(
         'Keranjang',
         'Berhasil Checkout',
-        Icons.shopping_cart_checkout_outlined,
+        'shopping_cart_checkout_outlined',
       );
     } catch (e) {
       Get.snackbar(

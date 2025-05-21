@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../utils/icon_helper.dart';
 import '../../controllers/home/notification_controller.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -54,12 +55,13 @@ class NotificationScreen extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           itemCount: notifController.notifications.length,
           itemBuilder: (context, index) {
-            final notif = notifController.notifications[index];
+            final reversedNotifs = notifController.notifications.reversed.toList();
+            final notif = reversedNotifs[index];
             return Dismissible(
               key: Key(notif.timestamp.toIso8601String()),
               direction: DismissDirection.endToStart,
               onDismissed: (direction) {
-                notifController.notifications.removeAt(index);
+                notifController.notifications.remove(notif);
                 notifController.saveNotifications();
                 Get.snackbar(
                   "Notifikasi dihapus",
@@ -88,15 +90,11 @@ class NotificationScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 12),
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.blueAccent,
-                    child: Icon(
-                      IconData(
-                        notif.iconCode,
-                        fontFamily: notif.iconFontFamily,
-                      ),
-                      color: Colors.white,
-                    ),
-                  ),
+                      backgroundColor: Colors.blueAccent,
+                      child: Icon(
+                        getIconByName(notif.iconName),
+                        color: Colors.white,
+                      )),
                   title: Text(
                     notif.title,
                     style: const TextStyle(

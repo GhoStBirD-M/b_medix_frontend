@@ -43,10 +43,14 @@ class PillReminderController extends GetxController {
         scheduledTime: reminder.scheduledDateTime(),
       );
       await loadReminders();
+      Get.snackbar('Success', 'Pengingat berhasil ditambahkan',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP);
       notifController.addNotification(
         'Pengingat',
         'Pengingat minum obat berhasil ditambahkan',
-        Icons.notifications_active_outlined,
+        'notifications_active_outlined',
       );
     } catch (e) {
       Get.snackbar('Error', 'Gagal menambahkan pengingat: $e');
@@ -69,7 +73,7 @@ class PillReminderController extends GetxController {
       Get.snackbar('Success', 'Pengingat berhasil dihapus',
           backgroundColor: Colors.green,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
     } catch (e) {
       Get.snackbar('Error', 'Gagal menghapus pengingat: $e');
     }

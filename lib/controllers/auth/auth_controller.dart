@@ -55,7 +55,8 @@ class AuthController extends GetxController {
       user.value = result;
       Get.offAllNamed(AppPages.HOME);
     } catch (e) {
-      Get.snackbar('Error', e.toString(),
+      final errorMsg = e.toString().replaceFirst('Exception: ', '');
+      Get.snackbar('Error', errorMsg,
           backgroundColor: Colors.red,
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM);
@@ -154,7 +155,7 @@ class AuthController extends GetxController {
       Get.snackbar('Success', 'Your account has been deleted',
           backgroundColor: Colors.green,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
     } catch (e) {
       Get.back(); // tutup loading dialog
       Get.snackbar('Error', e.toString(),

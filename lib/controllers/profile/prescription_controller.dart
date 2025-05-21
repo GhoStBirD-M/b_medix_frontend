@@ -48,11 +48,11 @@ class PrescriptionController extends GetxController {
     savePrescriptions();
     Get.back();
     Get.snackbar(
-      'Berhasil',
+      'Success',
       'Resep berhasil ditambahkan',
       backgroundColor: Colors.green,
       colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
     );
   }
 
@@ -64,11 +64,11 @@ class PrescriptionController extends GetxController {
       savePrescriptions();
       Get.back();
       Get.snackbar(
-        'Berhasil',
+        'Success',
         'Resep berhasil diperbarui',
         backgroundColor: Colors.green,
         colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
       );
     }
   }
