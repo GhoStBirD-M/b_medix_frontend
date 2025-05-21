@@ -41,7 +41,7 @@ class Header extends StatelessWidget {
                 Text(
                   greeting,
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF4F4F4F),
                   ),
