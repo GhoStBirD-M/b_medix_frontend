@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             return Column(
               children: [
                 Header(
-                  greeting: 'How was Ur Health?',
+                  greeting: 'How was your Health?',
                   name: user.name,
                   profilePic: 'assets/images/profile.jpg',
                   notificationKey: _notificationKey, // Pass key to Header
