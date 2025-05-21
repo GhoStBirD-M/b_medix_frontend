@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  flutter_thermal_printer
   share_plus
   url_launcher_windows
 )

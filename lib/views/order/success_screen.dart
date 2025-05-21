@@ -1,6 +1,9 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_thermal_printer/utils/printer.dart';
+import 'package:flutter_thermal_printer/flutter_thermal_printer.dart';
 import '../../routes/app_pages.dart';
 import '../../views/widgets/order/info_container.dart';
 import '../../views/widgets/order/primary_button.dart';
@@ -14,7 +17,7 @@ class SuccessScreen extends StatefulWidget {
     super.key,
     required this.paymentMethod,
     required this.orderId,
-    required this.total
+    required this.total,
   });
 
   @override
@@ -22,13 +25,80 @@ class SuccessScreen extends StatefulWidget {
 }
 
 class _SuccessScreenState extends State<SuccessScreen> {
-  final List<String> printers = ['ZQ120', 'XP-P300', 'RPP300', 'PAPERANG P1'];
-  String? selectedPrinter;
+  final FlutterThermalPrinter _flutterThermalPrinter = FlutterThermalPrinter.instance;
+
+  List<Printer> _printers = [];
+  Printer? selectedPrinter;
 
   @override
   void initState() {
     super.initState();
-    selectedPrinter = printers.first;
+    _startScan();
+  }
+
+  void _startScan() async {
+    await _flutterThermalPrinter.getPrinters(connectionTypes: [
+      ConnectionType.BLE,
+    ]);
+    _flutterThermalPrinter.devicesStream.listen((devices) {
+      setState(() {
+        _printers = devices;
+      });
+    });
+  }
+
+  Future<void> printReceipt(String paymentMethod) async {
+    if (_printers.isEmpty) {
+      Get.snackbar("No Printer Found", "No Bluetooth printer detected.");
+      return;
+    }
+
+    if (selectedPrinter == null) {
+      Get.snackbar("Select Printer", "Please select a Bluetooth printer.");
+      return;
+    }
+
+    try {
+      await _flutterThermalPrinter.connect(selectedPrinter!);
+      await Future.delayed(const Duration(milliseconds: 300));
+
+      final profile = await CapabilityProfile.load();
+      final generator = Generator(PaperSize.mm58, profile);
+      final List<int> bytes = [];
+      bytes.addAll(generator.feed(1));
+      bytes.addAll(generator.text('Payment Successfull!',
+          styles: PosStyles(
+              align: PosAlign.center,
+              bold: true,
+              height: PosTextSize.size2,
+              width: PosTextSize.size2)));
+      bytes.addAll(generator.text('-----------------------------'));
+      bytes.addAll(generator.text('Order ID   : ${widget.orderId}'));
+      bytes.addAll(generator.text('Method     : $paymentMethod'));
+      bytes.addAll(generator.text(
+          'Date       : ${DateFormat('dd MMM yyyy').format(DateTime.now())}'));
+      bytes.addAll(generator.text('-----------------------------'));
+      bytes.addAll(generator.text('Thank you!',
+          styles: PosStyles(align: PosAlign.center)));
+      bytes.addAll(generator.feed(0));
+      bytes.addAll(generator.cut());
+
+      const int chunkSize = 240;
+      int offset = 0;
+      while (offset < bytes.length) {
+        final end = (offset + chunkSize < bytes.length) ? offset + chunkSize : bytes.length;
+        final chunk = Uint8List.fromList(bytes.sublist(offset, end));
+        await _flutterThermalPrinter.printData(selectedPrinter!, chunk);
+        offset = end;
+        await Future.delayed(const Duration(milliseconds: 100));
+      }
+
+      Get.snackbar("Success", "Receipt sent to printer.");
+    } catch (e) {
+      Get.snackbar("Error", "Failed to print: $e");
+    } finally {
+      await _flutterThermalPrinter.disconnect(selectedPrinter!);
+    }
   }
 
   @override
@@ -40,9 +110,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Animated checkmark icon
               Container(
                 width: 120,
                 height: 120,
@@ -64,7 +132,6 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 ),
               ),
               const SizedBox(height: 32),
-              // Title
               const Text(
                 'Payment Successful!',
                 style: TextStyle(
@@ -74,7 +141,6 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              // Subtitle
               Text(
                 'Your payment via ${widget.paymentMethod} has been successfully processed.',
                 textAlign: TextAlign.center,
@@ -85,30 +151,19 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 ),
               ),
               const SizedBox(height: 48),
-              // Receipt details
               InfoContainer(
                 withShadow: true,
                 children: [
                   _buildInfoRow('Order ID', widget.orderId),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
-                    child: Divider(color: Color(0xFFE2E8F0)),
-                  ),
+                  const Divider(color: Color(0xFFE2E8F0)),
                   _buildInfoRow('Payment Method', widget.paymentMethod.toUpperCase()),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
-                    child: Divider(color: Color(0xFFE2E8F0)),
-                  ),
+                  const Divider(color: Color(0xFFE2E8F0)),
                   _buildInfoRow('Date', DateFormat('MMMM dd, yyyy').format(DateTime.now())),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
-                    child: Divider(color: Color(0xFFE2E8F0)),
-                  ),
+                  const Divider(color: Color(0xFFE2E8F0)),
                   _buildInfoRow('Total', 'Rp ${NumberFormat.decimalPattern('id_ID').format(double.parse(widget.total).round())}'),
                 ],
               ),
               const SizedBox(height: 24),
-              // Styled dropdown
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: BoxDecoration(
@@ -117,7 +172,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                   border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
+                  child: DropdownButton<Printer>(
                     value: selectedPrinter,
                     isExpanded: true,
                     hint: const Text(
@@ -129,13 +184,13 @@ class _SuccessScreenState extends State<SuccessScreen> {
                       fontSize: 16,
                       color: Color(0xFF1E293B),
                     ),
-                    items: printers.map((String printer) {
-                      return DropdownMenuItem<String>(
+                    items: _printers.map((Printer printer) {
+                      return DropdownMenuItem<Printer>(
                         value: printer,
-                        child: Text(printer),
+                        child: Text(printer.name ?? 'No Name'),
                       );
                     }).toList(),
-                    onChanged: (String? newValue) {
+                    onChanged: (Printer? newValue) {
                       setState(() {
                         selectedPrinter = newValue;
                       });
@@ -144,16 +199,13 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              // Print Receipt button
               PrimaryButton(
                 text: 'Print Receipt',
                 onPressed: () {
-                  print('Printing receipt with $selectedPrinter');
-                  // Add actual printing logic here
+                  printReceipt(widget.paymentMethod);
                 },
               ),
               const SizedBox(height: 12),
-              // Back to Home button
               PrimaryButton(
                 text: 'Back to Home',
                 onPressed: () => Get.offAllNamed(AppPages.HOME),

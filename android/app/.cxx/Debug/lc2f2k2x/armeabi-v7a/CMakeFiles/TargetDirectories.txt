@@ -1,2 +1,0 @@
-C:/Users/Administrator/Documents/Projek/flutter/b_medix_frontend/android/app/.cxx/Debug/lc2f2k2x/armeabi-v7a/CMakeFiles/edit_cache.dir
-C:/Users/Administrator/Documents/Projek/flutter/b_medix_frontend/android/app/.cxx/Debug/lc2f2k2x/armeabi-v7a/CMakeFiles/rebuild_cache.dir
